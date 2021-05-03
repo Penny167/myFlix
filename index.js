@@ -57,3 +57,8 @@ app.get('/',(req,res) => {
 
 // Using express.static to serve documentation file from the public folder
 app.use(express.static('public'));
+
+// Error handling function to log errors to the console
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+});

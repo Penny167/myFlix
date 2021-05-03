@@ -49,3 +49,6 @@ app.get('/movies',(req, res) => {
 app.get('/',(req,res) => {
   res.send('Welcome to myFlix!');
 });
+
+// Using express.static to serve documentation file from the public folder
+app.use(express.static('public'));

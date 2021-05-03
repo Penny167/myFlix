@@ -42,6 +42,9 @@ app.listen(8080,() => {
   console.log('The server is listening on port 8080')
 });
 
+// Using morgan to log requests
+app.use(morgan('common'));
+
 // Routing the request for the JSON object
 app.get('/movies',(req, res) => {
   res.json(topTenMovies);

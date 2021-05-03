@@ -1,4 +1,6 @@
 const express = require('express');
+// Adding morgan
+const morgan = require('morgan');
 const app = express();
 
 // Creating a JSON object with the names of my top 10 movies

@@ -44,3 +44,8 @@ app.listen(8080,() => {
 app.get('/movies',(req, res) => {
   res.json(topTenMovies);
 });
+
+// Creating a second endpoint, to '/', with textual response
+app.get('/',(req,res) => {
+  res.send('Welcome to myFlix!');
+});

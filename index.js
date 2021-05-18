@@ -1,7 +1,13 @@
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+const Movies = Models.Movie;
+const Users = Models.User;
 const express = require('express');
 // Adding morgan
 const morgan = require('morgan');
 const app = express();
+
+mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
 // Creating a JSON object with the names of my top 10 movies
 let topTenMovies = [

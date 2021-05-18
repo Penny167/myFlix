@@ -6,6 +6,7 @@ const express = require('express');
 // Adding morgan
 const morgan = require('morgan');
 const app = express();
+app.use(express.json());
 
 mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});
 

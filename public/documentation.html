@@ -78,20 +78,30 @@
         Birth:
         Death:
         }
-        </td>
+      </td>
     </tr>
     <tr>
-      <td>Register a new user</td>
+      <td>Registers a new user</td>
       <td>/users</td>
       <td>POST</td>
       <td>A JSON object with data about the user to be registered:
         {
-        username:
-        password:
-        favourites: [
-            ]
-        }</td>
-      <td>A text message confirming that registration has been successful</td>
+        Username:
+        Password:
+        Email:
+        Birthday:
+        }
+      </td>
+      <td>A JSON object with the new user’s details:
+        {
+        _id:
+        Username:
+        Password:
+        Email:
+        Birthday:
+        FavouriteMovies: []
+        }
+      </td>
     </tr>
     <tr>
       <td>Update a users username</td>

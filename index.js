@@ -39,7 +39,7 @@ app.get('/movies/:Title', (req, res) => {
   })
 });
 
-// Return the description of a genre by searching by its name
+// Return the description of a genre searched for by name
 app.get('/movies/:Genre/:Name', (req, res) => {
   Movies.findOne({"Genre.Name": req.params.Name})
   .then((movie) => {
@@ -63,7 +63,22 @@ app.get('/movies/:Director/:Details/:Name', (req, res) => {
   })
 });
 
-/*Endpoint to register a new user
+/* Add a movie to a users favourites
+app.post('/users/:Username/Movies/:MovieId', (req, res) => {
+  Users.findOneAndUpdate({Username: req.params.Username}),
+  {$push: {FavouriteMovies: req.params.MovieId}},
+  {new: true},
+  (err, user) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.status(200).json(user);
+    }
+  }
+});*/
+
+// Register a new user
 app.post ('/users', (req, res) => {
   Users.findOne({Username: req.body.Username})
   .then((user) => {
@@ -85,7 +100,7 @@ app.post ('/users', (req, res) => {
       })
     }
   })
-});*/
+});
 
 
 /* Using morgan to log requests

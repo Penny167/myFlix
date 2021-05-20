@@ -96,11 +96,33 @@ app.post ('/users', (req, res) => {
       })
       .catch((error) => {
         console.error(error);
-        res.status(400).send('Error: ' + error);
+        res.status(500).send('Error: ' + error);
       })
     }
   })
 });
+
+// Deregister an existing user
+app.delete ('/users/:Username', (req, res) => {
+  Users.findOneAndDelete({Username: req.params.Username})
+  .then((user) => {
+    if(!user) {
+    res.status(400).send(req.params.Username + ' does not exist.');
+    } else {
+        res.status(200).send(req.params.Username + ' has been deregistered');
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  })
+});
+
+
+
+
+
+
 
 
 /* Using morgan to log requests

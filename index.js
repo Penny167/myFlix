@@ -158,17 +158,8 @@ app.delete('/users/:Username/:MovieID', (req, res) => {
 });
 
 
-
-
-
-
 /* Using morgan to log requests
 app.use(morgan('common'));
-
-// Routing the request for the JSON object
-app.get('/movies',(req, res) => {
-  res.json(topTenMovies);
-});
 
 // Creating a second endpoint, to '/', with textual response
 app.get('/',(req,res) => {

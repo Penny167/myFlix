@@ -63,21 +63,6 @@ app.get('/movies/:Director/:Details/:Name', (req, res) => {
   })
 });
 
-/* Add a movie to a users favourites
-app.post('/users/:Username/Movies/:MovieId', (req, res) => {
-  Users.findOneAndUpdate({Username: req.params.Username}),
-  {$push: {FavouriteMovies: req.params.MovieId}},
-  {new: true},
-  (err, user) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-    } else {
-      res.status(200).json(user);
-    }
-  }
-});*/
-
 // Register a new user
 app.post('/users', (req, res) => {
   Users.findOne({Username: req.body.Username})
@@ -140,7 +125,37 @@ app.put('/users/:Username', (req, res) => {
     })
 });
 
+// Add a movie to a user's favourites
+app.put('/users/:Username/:MovieID', (req, res) => {
+  Users.findOneAndUpdate(
+  {Username: req.params.Username},
+  {$push: {FavouriteMovies: req.params.MovieID}},
+  {new: true}
+  )
+  .then((user) => {
+    res.status(200).json(user.FavouriteMovies);
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  })
+});
 
+// Delete a movie from a user's favourites
+app.delete('/users/:Username/:MovieID', (req, res) => {
+  Users.findOneAndUpdate(
+  {Username: req.params.Username},
+  {$pull: {FavouriteMovies: req.params.MovieID}},
+  {new: true}
+  )
+  .then((user) => {
+    res.status(200).json(user.FavouriteMovies);
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  })
+});
 
 
 

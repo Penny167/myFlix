@@ -126,18 +126,18 @@
       </td>
     </tr>
     <tr>
-      <td>Add a movie to users list of favourites (this updates the list of favourites associated to that user)</td>
-      <td>/users/[username]/[favourites]/[newFavourite]</td>
+      <td>Adds a movie to a user's list of favourites</td>
+      <td>/users/[username]/[MovieID]</td>
       <td>PUT</td>
       <td>No request body required</td>
-      <td>A text message confirming that the movie has been added to favourites</td>
+      <td>A JSON object with the user's updated list of favourites: []</td>
     </tr>
     <tr>
-      <td>Remove a movie from users list of favourites</td>
-      <td>/users/[username]/[favourites]</td>
+      <td>Removes a movie from a user's list of favourites</td>
+      <td>/users/[username]/[MovieID]</td>
       <td>DELETE</td>
       <td>No request body required</td>
-      <td>A text message confirming that the movie has been removed from favourites</td>
+      <td>A JSON object with the user's updated list of favourites: []</td>
     </tr>
     <tr>
       <td>Deregisters an existing user</td>

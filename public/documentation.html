@@ -104,11 +104,26 @@
       </td>
     </tr>
     <tr>
-      <td>Update a users username</td>
-      <td>/users/[username]/[newUsername]</td>
+      <td>Updates an existing user's details</td>
+      <td>/users/[username]</td>
       <td>PUT</td>
-      <td>No request body required</td>
-      <td>A text message confirming that the username has been updated</td>
+      <td>A JSON object with the following fields completed, with either new values or existing values for fields that remain unchanged:
+        {
+        Username:
+        Password:
+        Email:
+        Birthday:
+      </td>
+      <td>A JSON object with the user’s details reflecting any changes made by the request:
+        {
+        _id:
+        Username:
+        Password:
+        Email:
+        Birthday:
+        FavouriteMovies: []
+        }
+      </td>
     </tr>
     <tr>
       <td>Add a movie to users list of favourites (this updates the list of favourites associated to that user)</td>

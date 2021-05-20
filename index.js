@@ -79,7 +79,7 @@ app.post('/users/:Username/Movies/:MovieId', (req, res) => {
 });*/
 
 // Register a new user
-app.post ('/users', (req, res) => {
+app.post('/users', (req, res) => {
   Users.findOne({Username: req.body.Username})
   .then((user) => {
     if(user) {
@@ -103,7 +103,7 @@ app.post ('/users', (req, res) => {
 });
 
 // Deregister an existing user
-app.delete ('/users/:Username', (req, res) => {
+app.delete('/users/:Username', (req, res) => {
   Users.findOneAndDelete({Username: req.params.Username})
   .then((user) => {
     if(!user) {
@@ -116,6 +116,28 @@ app.delete ('/users/:Username', (req, res) => {
     console.error(error);
     res.status(500).send('Error: ' + error);
   })
+});
+
+// Update an existing user's details
+app.put('/users/:Username', (req, res) => {
+  Users.findOneAndUpdate(
+    {Username: req.params.Username},
+    {$set: {
+        Username: req.body.Username,
+        Password: req.body.Password,
+        Email: req.body.Email,
+        Birthday: req.body.Birthday
+      }
+    },
+    {new: true}
+    )
+    .then((user) => {
+      res.status(200).json(user);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    })
 });
 
 

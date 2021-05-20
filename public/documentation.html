@@ -11,12 +11,12 @@
   <h1>myFlixapi</h1>
   <h2>Overview</h2>
   <p>The myFlixapi is a REST API that supports the "myFlix" movie web application, by providing
-    access to the server-side database. This contains information about movies, including: title, genre,
-    director and more.
+    access to the server-side database. This contains information about movies, including: titles, movie descriptions
+    and information about genres and directors.
   </p>
   <h2>Table of API endpoints</h2>
   <p>The following table lists all available endpoints including: a high level description of the data available,
-    URL, http method, format required for requests, and format of responses. Request parameters within the URL are
+    URL, http method, format required for requests and format of responses. Request parameters within the URL are
     indicated with square brackets.  
   </p>
   <table>
@@ -28,45 +28,55 @@
       <th>Response body data format </th>
     </tr>
     <tr>
-      <td>Return a list of all movies</td>
+      <td>Returns a list of all movies</td>
       <td>/movies</td>
       <td>GET</td>
       <td>No request body required</td>
-      <td>JSON object with data on all movies</td>
+      <td>JSON object with available data on all movies</td>
     </tr>
     <tr>
-      <td>Return data about a single movie by title</td>
+      <td>Returns data about a single movie by title</td>
       <td>/movies/[title]</td>
       <td>GET</td>
       <td>No request body required</td>
-      <td>JSON object with data about movie requested:
+      <td>JSON object with available data about the movie requested:
         {
-        title:
-        description:
-        genre:
-        director:
-        image url:
+        id:
+        Title:
+        Description:
+        Genre: {
+          Name:
+          Description:
+        }
+        Director: {
+          Name:
+          Bio:
+          Birth:
+          Death:
+        }
+        ImagePath:
+        Featured:
         }
         </td>
     </tr>
     <tr>
-      <td>Return the movie genre description by title</td>
-      <td>/movies/[title]/[genre]</td>
+      <td>Returns the description of a movie genre searched for by name</td>
+      <td>/movies/[Genre]/[Name]</td>
       <td>GET</td>
       <td>No request body required</td>
-      <td>A text message returning the genre of the movie selected</td>
+      <td>A text message returning the description of the genre selected</td>
     </tr>
     <tr>
-      <td>Return data about a director by name</td>
-      <td>/directors/[name]</td>
+      <td>Returns details about a director searched for by name</td>
+      <td>/movies/[Director]/[Details]/[Name]</td>
       <td>GET</td>
       <td>No request body required</td>
-      <td>JSON object with data about director requested:
+      <td>JSON object with details about the director requested:
         {
-        name:
-        bio:
-        birth year:
-        death year:
+        Name:
+        Bio:
+        Birth:
+        Death:
         }
         </td>
     </tr>

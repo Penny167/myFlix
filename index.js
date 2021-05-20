@@ -15,6 +15,79 @@ app.listen(8080,() => {
   console.log('The server is listening on port 8080')
 });
 
+// Return a list of all movies
+app.get('/movies', (req, res) => {
+  Movies.find()
+  .then((movies) => {
+    res.status(200).json(movies);
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  })
+});
+
+// Return data about a single movie by title:
+app.get('/movies/:Title', (req, res) => {
+  Movies.findOne({Title: req.params.Title})
+  .then((movie) => {
+    res.status(200).json(movie);
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  })
+});
+
+// Return the description of a genre by searching by its name
+app.get('/movies/:Genre/:Name', (req, res) => {
+  Movies.findOne({"Genre.Name": req.params.Name})
+  .then((movie) => {
+    res.status(200).send(movie.Genre.Description);
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  })
+});
+
+// Return the details about a director searched for by name
+app.get('/movies/:Director/:Details/:Name', (req, res) => {
+  Movies.findOne({"Director.Name": req.params.Name})
+  .then((movie) => {
+    res.status(200).json(movie.Director);
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  })
+});
+
+/*Endpoint to register a new user
+app.post ('/users', (req, res) => {
+  Users.findOne({Username: req.body.Username})
+  .then((user) => {
+    if(user) {
+    res.status(400).send(req.body.Username + ' already exists.');
+    } else {
+      Users.create({
+        Username: req.body.Username,
+        Password: req.body.Password,
+        Email: req.body.Email,
+        Birthday: req.body.Birthday
+      })
+      .then((user) => {
+        res.status(201).json(user);
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(400).send('Error: ' + error);
+      })
+    }
+  })
+});*/
+
+
 /* Using morgan to log requests
 app.use(morgan('common'));
 

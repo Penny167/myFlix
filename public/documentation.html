@@ -36,7 +36,7 @@
     </tr>
     <tr>
       <td>Returns data about a single movie by title</td>
-      <td>/movies/[title]</td>
+      <td>/movies/[Title]</td>
       <td>GET</td>
       <td>No request body required</td>
       <td>JSON object with available data about the movie requested:
@@ -61,14 +61,14 @@
     </tr>
     <tr>
       <td>Returns the description of a movie genre searched for by name</td>
-      <td>/movies/[Genre]/[Name]</td>
+      <td>/movies/genre/[Name]</td>
       <td>GET</td>
       <td>No request body required</td>
       <td>A text message returning the description of the genre selected</td>
     </tr>
     <tr>
       <td>Returns details about a director searched for by name</td>
-      <td>/movies/[Director]/[Details]/[Name]</td>
+      <td>/movies/director/[Name]</td>
       <td>GET</td>
       <td>No request body required</td>
       <td>JSON object with details about the director requested:
@@ -105,7 +105,7 @@
     </tr>
     <tr>
       <td>Updates an existing user's details</td>
-      <td>/users/[username]</td>
+      <td>/users/[Username]</td>
       <td>PUT</td>
       <td>A JSON object with the following fields completed, with either new values or existing values for fields that remain unchanged:
         {
@@ -127,21 +127,21 @@
     </tr>
     <tr>
       <td>Adds a movie to a user's list of favourites</td>
-      <td>/users/[username]/[MovieID]</td>
+      <td>/users/[Username]/[MovieID]</td>
       <td>PUT</td>
       <td>No request body required</td>
       <td>A JSON object with the user's updated list of favourites: []</td>
     </tr>
     <tr>
       <td>Removes a movie from a user's list of favourites</td>
-      <td>/users/[username]/[MovieID]</td>
+      <td>/users/[Username]/[MovieID]</td>
       <td>DELETE</td>
       <td>No request body required</td>
       <td>A JSON object with the user's updated list of favourites: []</td>
     </tr>
     <tr>
       <td>Deregisters an existing user</td>
-      <td>/users/[username]</td>
+      <td>/users/[Username]</td>
       <td>DELETE</td>
       <td>No request body required</td>
       <td>A text message confirming that the user has been deregistered</td>

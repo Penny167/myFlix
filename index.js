@@ -7,6 +7,9 @@ const express = require('express');
 const morgan = require('morgan');
 const app = express();
 app.use(express.json());
+const auth = require('./auth.js')(app);
+const passport = require('passport');
+require('./passport');
 
 mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});
 

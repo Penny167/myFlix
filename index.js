@@ -173,4 +173,4 @@ app.delete('/users/:Username/:MovieID', passport.authenticate('jwt', {session: f
 // Error handling function to log errors to the console
 app.use((err, req, res, next) => {
   console.error(err.stack);
-});
+}); 

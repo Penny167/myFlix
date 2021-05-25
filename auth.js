@@ -13,7 +13,7 @@ const generateToken = (user) => {
 router.post('/login', passport.authenticate('local', {session: false}), (req, res) => {
   // If this function gets called, authentication was successful.
   // `req.user` contains the authenticated user.
-  generateToken(req.user)
+  let token = generateToken((req.user).toJSON())
   .then(user, token)
     res.status(201).json({user, token})
   .catch((error) => {

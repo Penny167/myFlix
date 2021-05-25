@@ -7,7 +7,7 @@ const express = require('express');
 const morgan = require('morgan');
 const app = express();
 app.use(express.json());
-require('./auth.js')(app);
+const auth = require('./auth.js')(app);
 const passport = require('passport');
 require('./passport');
 

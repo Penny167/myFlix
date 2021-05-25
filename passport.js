@@ -26,7 +26,7 @@ passport.use(new LocalStrategy(
 ));
 
 passport.use(new JWTStrategy(
-  // Options object requires the function to return the JWT and the secret to decode it
+  // Options object must contain the function to return the JWT and the secret to decode it
   {jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(), secretOrKey: 'secret'},
   //Verify callback takes decoded JWT payload and invokes done where userid valid
   (jwt_payload, done) => {

@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const Models = require('./models.js');
 const Users = Models.User;
 const JWTStrategy = require('passport-jwt').Strategy;
-const ExtractJWT = require('passport-jwt').ExtractJWT;
+const ExtractJWT = require('passport-jwt').ExtractJwt;
 
 passport.use(new LocalStrategy(
   // No options stated: Because our fields are called Username and Password we don't need to map these explicitly 

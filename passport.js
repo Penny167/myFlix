@@ -31,9 +31,9 @@ passport.use(new LocalStrategy({
 passport.use(new JWTStrategy(
   // Options object must contain the function to return the JWT and the secret to decode it
   {jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(), secretOrKey: 'secret'},
-  //Verify callback takes decoded JWT payload and invokes done where userid valid
+  //Verify callback takes decoded JWT payload and invokes done where username valid
   (jwt_payload, done) => {
-    Users.findOne({id: jwt_payload.sub}, (err, user) => {
+    Users.findOne({Username: jwt_payload.sub}, (err, user) => {
       if (err) {
         console.log(err);
         return done(err);

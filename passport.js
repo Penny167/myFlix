@@ -13,7 +13,7 @@ passport.use(new LocalStrategy(
 },
   // Verify callback takes username, password and invokes done where credentials are valid
   (username, password, done) => {
-    console.log(username + 'test' + password);
+    console.log(username + ' ' + password);
     Users.findOne({Username: username}, (err, user) => {
       if (err) {
         console.log(err);

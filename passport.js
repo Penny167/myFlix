@@ -5,8 +5,11 @@ const Users = Models.User;
 const JWTStrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 
-passport.use(new LocalStrategy(
-  // No options stated: Because our fields are called Username and Password we don't need to map these explicitly 
+passport.use(new LocalStrategy({
+  // Parameters: Changing default request parameter names becaused capitalized versions will be used
+  username: 'Username',
+  password: 'Password'
+},
   // Verify callback takes username, password and invokes done where credentials are valid
   (username, password, done) => {
     console.log(username + ' ' + password);

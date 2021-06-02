@@ -5,7 +5,7 @@ const jwtSecret = 'secret';
 
 // Create function to generate jsonwebtoken
 const generateToken = (user) => {
-  return jwt.sign(user, jwtSecret, {subject: user.Username, algorithm: 'HS256', expiresin: '7d'});
+  return jwt.sign(user, jwtSecret, {subject: user.Username, algorithm: 'HS256', expiresIn: '7d'});
 }
 
 // Create login route for registered users that authenticates using local strategy then assigns token

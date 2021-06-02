@@ -169,4 +169,13 @@ app.listen(8080, () => {
 */
 
 /*
+req.login(user, { session: false }, (error) => {
+        if (error) {
+          res.send(error);
+        }
+        
+      });
+
+
+
 */

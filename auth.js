@@ -18,13 +18,8 @@ module.exports = (app) => {
           user: user
         });
       }
-      req.login(user, { session: false }, (error) => {
-        if (error) {
-          res.send(error);
-        }
-        let token = generateToken(user.toJSON());
-        return res.json({ user, token });
-      });
+      let token = generateToken(user.toJSON());
+      return res.json({ user, token });
     })(req, res);
   });
   } 

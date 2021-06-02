@@ -152,3 +152,21 @@ app.delete('/users/:username', (req, res) => {
 app.listen(8080, () => {
   console.log('Your app is listening on port 8080');
 });
+
+// Test code for login route
+/* router.post('/login', passport.authenticate('local', {session: false}), (req, res) => {
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user.
+      let token = generateToken((req.user).toJSON())
+      .then(user, token)
+        res.status(201).json({user, token})
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send('Error: ' + error);
+      })
+    });
+  }
+*/
+
+/*
+*/

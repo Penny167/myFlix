@@ -9,17 +9,28 @@ const generateToken = (user) => {
 }
 
 // Create login route for registered users that authenticates using local strategy then assigns token
-module.exports = (router) => {
-  router.post('/login', passport.authenticate('local', {session: false}), (req, res) => {
-  // If this function gets called, authentication was successful.
-  // `req.user` contains the authenticated user.
-    let token = generateToken((req.user).toJSON())
-    .then(user, token)
-      res.status(201).json({user, token})
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send('Error: ' + error);
-    })
+module.exports = (app) => {
+  app.post('/login', (req, res) => {
+    passport.authenticate('local', { session: false }, (error, user, info) => {
+      if (error) {
+        return res.status(400).json({
+          message: 'Something is not right',
+          user: user
+        });
+      }
+      if (!user) {
+        return res.status(400).json({
+          message: 'No user found',
+          user: user
+        });
+      }
+      req.login(user, { session: false }, (error) => {
+        if (error) {
+          res.send(error);
+        }
+        let token = generateToken(user.toJSON());
+        return res.json({ user, token });
+      });
+    })(req, res);
   });
-}
- 
+  } 

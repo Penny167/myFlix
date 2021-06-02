@@ -5,14 +5,15 @@ const Users = Models.User;
 const JWTStrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 
-passport.use(new LocalStrategy({
-  // Parameters: Changing default request parameter names becaused capitalized versions will be used
-  username: 'Username',
-  password: 'Password'
+passport.use(new LocalStrategy(
+  {
+// Parameters: Changing default request parameter names becaused capitalized versions will be used
+  usernameField: 'Username',
+  passwordField: 'Password'
 },
   // Verify callback takes username, password and invokes done where credentials are valid
   (username, password, done) => {
-    console.log(username + ' ' + password);
+    console.log(username + 'test' + password);
     Users.findOne({Username: username}, (err, user) => {
       if (err) {
         console.log(err);

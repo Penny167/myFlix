@@ -12,15 +12,9 @@ const generateToken = (user) => {
 module.exports = (app) => {
   app.post('/login', (req, res) => {
     passport.authenticate('local', { session: false }, (error, user, info) => {
-      if (error) {
+      if (error || !user) {
         return res.status(400).json({
           message: 'Something is not right',
-          user: user
-        });
-      }
-      if (!user) {
-        return res.status(400).json({
-          message: 'No user found',
           user: user
         });
       }

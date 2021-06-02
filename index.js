@@ -8,7 +8,7 @@ const app = express();
 const passport = require('passport');
 require('./passport');
 app.use(express.json());
-const auth = require('./auth.js')(app);
+const auth = require('./auth.js');
 const cors = require('cors');
 
 mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -26,6 +26,9 @@ app.use(express.static('public'));
 
 // Using cors to allow requests from all origins
 app.use(cors());
+
+// Calling the auth function, passing the app as the parameter
+auth(app);
 
 // Landing page
 app.get('/',(req,res) => {

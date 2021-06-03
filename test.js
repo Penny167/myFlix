@@ -168,14 +168,11 @@ app.listen(8080, () => {
   }
 */
 
-/*
+/*  Redundant session code
 req.login(user, { session: false }, (error) => {
         if (error) {
           res.send(error);
         }
         
       });
-
-
-
 */

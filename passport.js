@@ -23,6 +23,10 @@ passport.use(new LocalStrategy(
         console.log('Invalid username.');
         return done(null, false, {message: 'Invalid username.'});
       }
+      if (!user.validatePassword(password)) {
+        console.log('Incorrect password.');
+        return done(null, false, {message: 'Incorrect password.'});
+      }
       console.log('Authentication complete.');
       return done(null, user);
     });

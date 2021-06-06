@@ -15,8 +15,9 @@ const {check, validationResult} = require('express-validator');
 mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
 // Setting up the server
-app.listen(8080,() => {
-  console.log('The server is listening on port 8080')
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0',() => {
+  console.log('The server is listening on port ' + port);
 });
 
 // Using morgan to log requests

@@ -10,6 +10,7 @@ require('./passport.js');
 app.use(express.json());
 const auth = require('./auth.js');
 const cors = require('cors');
+const {check, validationResult} = require('express-validator');
 
 mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -84,25 +85,36 @@ app.get('/movies/director/:Name', passport.authenticate('jwt', {session: false})
 });
 
 // Register a new user
-app.post('/users', (req, res) => {
+app.post('/users',
+  [
+    check('Username', 'Username must contain at least 5 characters.').isLength({min: 5}),
+    check('Username', 'Username must only contain alphanumeric characters.').isAlphanumeric(),
+    check('Password', 'Password must contain at least 8 characters.').isLength({min: 8}),
+    check('Email', 'Email must be a valid email address.').isEmail()
+  ],
+  (req, res) => {
+  let errors = validationResult(req);
+  if(!errors.isEmpty()) {
+    return res.status(422).json({errors: errors.array()});
+  }
   let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({Username: req.body.Username})
   .then((user) => {
     if(user) {
     res.status(400).send(req.body.Username + ' already exists.');
     } else {
-      Users.create({
-        Username: req.body.Username,
-        Password: hashedPassword,
-        Email: req.body.Email,
-        Birthday: req.body.Birthday
+    Users.create({
+      Username: req.body.Username,
+      Password: hashedPassword,
+      Email: req.body.Email,
+      Birthday: req.body.Birthday
       })
-      .then((user) => {
-        res.status(201).json(user);
+    .then((user) => {
+      res.status(201).json(user);
       })
-      .catch((error) => {
-        console.error(error);
-        res.status(500).send('Error: ' + error);
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
       })
     }
   })
@@ -125,15 +137,26 @@ app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), (
 });
 
 // Update an existing user's details
-app.put('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
+app.put('/users/:Username',
+  [
+    check('Username', 'Username must contain at least 5 characters.').isLength({min: 5}),
+    check('Username', 'Username must only contain alphanumeric characters.').isAlphanumeric(),
+    check('Password', 'Password must contain at least 8 characters.').isLength({min: 8}),
+    check('Email', 'Email must be a valid email address.').isEmail()
+  ],
+  passport.authenticate('jwt', {session: false}), (req, res) => {
+  let errors = validationResult(req);
+  if(!errors.isEmpty()) {
+    return res.status(422).json({errors: errors.array()});
+  }  
   Users.findOneAndUpdate(
     {Username: req.params.Username},
     {$set: {
-        Username: req.body.Username,
-        Password: req.body.Password,
-        Email: req.body.Email,
-        Birthday: req.body.Birthday
-      }
+      Username: req.body.Username,
+      Password: req.body.Password,
+      Email: req.body.Email,
+      Birthday: req.body.Birthday
+    }
     },
     {new: true}
     )

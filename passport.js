@@ -38,7 +38,7 @@ passport.use(new JWTStrategy(
   {jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(), secretOrKey: 'secret'},
   //Verify callback takes decoded JWT payload and invokes done where username valid
   (jwt_payload, done) => {
-    Users.findOne({Username: jwt_payload.sub}, (err, user) => {
+    Users.findById(jwt_payload._id, (err, user) => {
       if (err) {
         console.log(err);
         return done(err);

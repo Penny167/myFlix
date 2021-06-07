@@ -28,6 +28,13 @@
       <th>Response body data format </th>
     </tr>
     <tr>
+      <td>Landing page</td>
+      <td>/</td>
+      <td>GET</td>
+      <td>No request body required</td>
+      <td>Welcome message</td>
+    </tr>
+    <tr>
       <td>Returns a list of all movies</td>
       <td>/movies</td>
       <td>GET</td>
@@ -102,6 +109,13 @@
         FavouriteMovies: []
         }
       </td>
+    </tr>
+    <tr>
+      <td>Logs in a registered user</td>
+      <td>/login</td>
+      <td>POST</td>
+      <td>No request body required; user enters username and password into fields provided</td>
+      <td>JSON object with user's details and a json web token for authentication of all subsequent requests whilst logged in</td>
     </tr>
     <tr>
       <td>Updates an existing user's details</td>

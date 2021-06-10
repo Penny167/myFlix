@@ -153,21 +153,6 @@ app.listen(8080, () => {
   console.log('Your app is listening on port 8080');
 });
 
-// Test code for login route
-/* router.post('/login', passport.authenticate('local', {session: false}), (req, res) => {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-      let token = generateToken((req.user).toJSON())
-      .then(user, token)
-        res.status(201).json({user, token})
-      .catch((error) => {
-        console.error(error);
-        res.status(500).send('Error: ' + error);
-      })
-    });
-  }
-*/
-
 /*  Redundant session code
 req.login(user, { session: false }, (error) => {
         if (error) {
@@ -176,3 +161,20 @@ req.login(user, { session: false }, (error) => {
         
       });
 */
+
+// Copying out local connection but retaining for test purposes
+// mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});
+
+/*  app.post('/login', (req, res) => {
+    passport.authenticate('local', { session: false }, (error, user, info) => {
+      if (error || !user) {
+        return res.status(400).json({
+          message: 'Something is not right',
+          user: user
+        });
+      }
+      let token = generateToken(user.toJSON());
+      return res.json({ user, token });
+    })(req, res);
+  });
+  } */

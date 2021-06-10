@@ -12,9 +12,6 @@ const auth = require('./auth.js');
 const cors = require('cors');
 const {check, validationResult} = require('express-validator');
 
-// Copying out local connection but retaining for test purposes
-// mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});
-
 mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 // Setting up the server

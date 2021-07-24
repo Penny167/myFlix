@@ -121,6 +121,18 @@ app.post('/users',
   })
 });
 
+// Return an existing user's details
+app.get('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
+  Users.findOne({Username: req.params.Username})
+  .then((user) => {
+    res.status(200).json(user);
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  })
+});
+
 // Deregister an existing user
 app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOneAndDelete({Username: req.params.Username})

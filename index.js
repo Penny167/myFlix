@@ -123,7 +123,7 @@ app.post('/users',
 
 // Return an existing user's details
 app.get('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
-  Users.findOne({Username: req.params.Username})
+  Users.findOne({Username: req.params.Username}).populate('FavouriteMovies')
   .then((user) => {
     res.status(200).json(user);
   })

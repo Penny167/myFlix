@@ -182,7 +182,7 @@ app.put('/users/:Username',
     })
 });
 
-/* Add a movie to a user's favourites (OLD version)
+// Add a movie to a user's favourites (OLD version)
 app.put('/users/:Username/:MovieID', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOneAndUpdate(
   {Username: req.params.Username},
@@ -196,7 +196,7 @@ app.put('/users/:Username/:MovieID', passport.authenticate('jwt', {session: fals
     console.error(error);
     res.status(500).send('Error: ' + error);
   })
-}); */
+});
 
 // Delete a movie from a user's favourites
 app.delete('/users/:Username/:MovieID', passport.authenticate('jwt', {session: false}), (req, res) => {
@@ -219,7 +219,7 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
 }); 
 
-// Revised function to add movie to favourites
+/* Revised function to add movie to favourites
 app.put('/users/:Username/:MovieID', passport.authenticate('jwt', {session: false}), (req, res) => {
   let userData = Users.findOne({ Username: req.params.Username});
   console.log(userData);
@@ -236,4 +236,4 @@ app.put('/users/:Username/:MovieID', passport.authenticate('jwt', {session: fals
     console.error(error);
     res.status(500).send('Error: ' + error);
   })
-}});
+}}); */

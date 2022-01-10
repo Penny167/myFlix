@@ -182,6 +182,18 @@ app.put('/users/:Username',
     })
 });
 
+// Return an existing user's favourite movies array
+app.get('/users/favourites/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
+  Users.findOne({Username: req.params.Username})
+  .then((user) => {
+    res.status(200).json(user.FavouriteMovies);
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  })
+});
+
 // Add a movie to a user's favourites (OLD version)
 app.put('/users/:Username/:MovieID', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOneAndUpdate(

@@ -3,59 +3,6 @@ const app = express();
 
 app.use(express.json());
 
-//set up in memory array of users for testing
-let users = [
-];
-
-//set up in memory array of movies
-let movies = [
-  {
-    title: 'The Godfather',
-    description: 'Epic crime drama detailing the rise and fall of a mafia family in America',
-    genre: 'Drama',
-    director: 'Francis Ford Coppola',
-    imageUrl: '#'
-  },
-  {
-    title: 'Lord of the Rings: The Fellowship of the Ring',
-    description: 'In this first part of the epic fantasy trilogy, a young hobbit and 8 companions set out to destroy the Ring of Power',
-    genre: 'Fantasy adventure',
-    director: 'Peter Jackson',
-    imageUrl: '#'
-  },
-  {
-    title: 'Indochine',
-    description: 'Epic romance set against the decline of European imperialism in Indochina',
-    genre: 'Period drama',
-    director: 'Regis Wargnier',
-    imageUrl: '#'
-  },
-  {
-    title: 'Out of Africa',
-    description: 'In 20th-century colonial Kenya, a Danish plantation owner has a passionate love affair with a free-spirited big-game hunter',
-    genre: 'Romantic drama',
-    director: 'Sydney Pollack',
-    imageUrl: '#' 
-  },
-  {
-    title: 'Elizabeth',
-    description: 'Oscar-winning portrayal of the early years of the reign of Elizabeth I',
-    genre: 'Period biopic',
-    director: 'Shekhar Kapur',
-    imageUrl: '#'  
-  }
-];
-
-// set up in memory array of directors for testing
-let directors = [
-  {
-    name: 'Sydney Pollack',
-    bio: 'Sydney Pollack was an Academy Award-winning director, producer, actor, writer and public figure, who directed and produced over 40 films.',
-    birthYear: 1934,
-    deathYear: 2008
-  }
-];
-
 // Returns data about all movies
 app.get('/movies', (req,res) => {
   res.json(movies);

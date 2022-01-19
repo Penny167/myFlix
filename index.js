@@ -1,15 +1,32 @@
+/** 
+ * @file The index file creates an Express application, sets up a server and implements routes to Api
+ * endpoints used to access the database containing the myFlix data. The routes use the models created 
+ * using mongoose in the models file, and the requests are authenticated using the strategies implemented
+ * using passport in the passport file. The connect method is used to connect the mongoose models to the
+ * database that contains the movies and users collections that the models reference. The database is 
+ * hosted on MongoDB Atlas.
+ */
+
+// Used to implement the database schema for requests made to the database
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
+// Used to create the express application 
 const express = require('express');
+// Used to log requests made to the database
 const morgan = require('morgan');
+// Calling the express function creates the application
 const app = express();
+// Used to create strategies for authenticating and authorising requests to the Api endpoints
 const passport = require('passport');
 require('./passport.js');
+// Built in middleware function used to parse request bodies as json
 app.use(express.json());
 const auth = require('./auth.js');
+// Used to control origins from which requests to the server can be made
 const cors = require('cors');
+// Used to implement validation checks on data provided by the user when submitting a registration request
 const {check, validationResult} = require('express-validator');
 
 mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});

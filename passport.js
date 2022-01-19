@@ -1,10 +1,9 @@
 /**
- * This file implements two passport strategies that are used to authenticate requests to the Api
+ * @file This file implements two passport strategies that are used to authenticate requests to the Api
  * endpoints. The local strategy is used when a user logs in; it validates the username and password
  * against the users collection in the database. For subsequent requests, the JWT strategy is used.
  * This validates the request by decoding the Json Web Token returned to the user on a successful login,
  * and then checking the user ID from the payload against the users collection in the database.
- * @file passport
  */
 
 const passport = require('passport');

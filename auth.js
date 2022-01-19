@@ -1,6 +1,5 @@
 /**
- * This file implements the login route for registered users. 
- * @file auth
+ * @file This file implements the login route for registered users. 
  */
 
 const passport = require('passport');
@@ -23,7 +22,7 @@ const generateToken = (user) => {
  * token is created by calling the generateToken function and a json object is returned containing 
  * the authenticated user and the token. The token is used to authorize requests by the user to access
  * routes that implement the jwt strategy.
- * @param {*} app The express application created in the index file that accesses the api routes.
+ * @param {*} app The Express application created in the index file that accesses the api routes.
  */
 module.exports = (app) => {
   app.post('/login', passport.authenticate('local', {session: false}), (req, res) => {

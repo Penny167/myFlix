@@ -1,4 +1,12 @@
+/**
+ * @file Contains code to establish a local connection to the database if needed, for testing any changes
+ * before updating the live Api hosted on Heroku. Also contains basic versions of the express requests. 
+ * These were used on in-memory data as practice, prior to implementing requests that use authentication 
+ * and models to query data held in the database.
+ */
 
+// Copying out local connection but retaining for test purposes
+// mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
 // Returns data about all movies
 app.get('/movies', (req,res) => {
@@ -91,6 +99,3 @@ app.delete('/users/:username', (req, res) => {
     res.send('User ' + req.params.username + ' was deleted');
   }
 });
-
-// Copying out local connection but retaining for test purposes
-// mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});

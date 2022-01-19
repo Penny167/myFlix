@@ -194,7 +194,7 @@ app.get('/users/favourites/:Username', passport.authenticate('jwt', {session: fa
   })
 });
 
-// Add a movie to a user's favourites (OLD version)
+// Add a movie to a user's favourites
 app.put('/users/:Username/:MovieID', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOneAndUpdate(
   {Username: req.params.Username},
@@ -230,22 +230,3 @@ app.delete('/users/:Username/:MovieID', passport.authenticate('jwt', {session: f
 app.use((err, req, res, next) => {
   console.error(err.stack);
 }); 
-
-/* Revised function to add movie to favourites
-app.put('/users/:Username/:MovieID', passport.authenticate('jwt', {session: false}), (req, res) => {
-  let userData = Users.findOne({ Username: req.params.Username});
-  console.log(userData);
-  if (!userData.FavouriteMovies.includes(req.params.MovieID)) {
-  Users.findOneAndUpdate(
-  {Username: req.params.Username},
-  {$push: {FavouriteMovies: req.params.MovieID}},
-  {new: true}
-  ).populate('FavouriteMovies')
-  .then((user) => {
-    res.status(200).json(user.FavouriteMovies);
-  })
-  .catch((error) => {
-    console.error(error);
-    res.status(500).send('Error: ' + error);
-  })
-}}); */

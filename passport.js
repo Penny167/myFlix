@@ -2,10 +2,11 @@
  * This file implements two passport strategies that are used to authenticate requests to the Api
  * endpoints. The local strategy is used when a user logs in; it validates the username and password
  * against the users collection in the database. For subsequent requests, the JWT strategy is used.
- * This validates the request by decoding the Jason Web Token returned to the user on a successful login,
- * and checking the user ID from the payload against the users collection in the database.
- * @module passport
+ * This validates the request by decoding the Json Web Token returned to the user on a successful login,
+ * and then checking the user ID from the payload against the users collection in the database.
+ * @file passport
  */
+
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const JWTStrategy = require('passport-jwt').Strategy;
@@ -15,7 +16,8 @@ const Models = require('./models.js');
 const Users = Models.User;
 
 /**
- * Authenticates request using passport local strategy and returns either authenticated user or error.
+ * Authenticates a request using passport's local strategy and returns either the authenticated user 
+ * or the error.
  */
 passport.use(new LocalStrategy(
   {
@@ -46,7 +48,8 @@ passport.use(new LocalStrategy(
 ));
 
 /**
- * Authenticates request using passport JWT strategy and returns either authenticated user or error.
+ * Authenticates a request using passport's JWT strategy and returns either the authenticated user 
+ * or the error.
  */
 passport.use(new JWTStrategy(
   // Options object must contain the function to return the JWT and the secret to decode it

@@ -17,18 +17,17 @@ const generateToken = (user) => {
 }
 
 /**
- * Implements the log in route. This route makes a post request to the database to log in a registered
- * user. The request is authenticated using the local passport strategy. If successful, a json web
- * token is created by calling the generateToken function and a json object is returned containing 
- * the authenticated user and the token. The token is used to authorize requests by the user to access
- * routes that implement the jwt strategy.
+ * Implements the log in route on the app. This route makes a POST request to the database to log in
+ * a registered user. The request is authenticated using the local passport strategy. If successful, 
+ * a json web token is created by calling the generateToken function and a json object is returned 
+ * containing the authenticated user and the token. The token is used to authorize requests by the 
+ * user to access routes that implement the jwt strategy.
  * @param {*} app The Express application created in the index file that accesses the api routes.
  */
 module.exports = (app) => {
   app.post('/login', passport.authenticate('local', {session: false}), (req, res) => {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-      let token = generateToken((req.user).toJSON());
+      // If authentication is successful, this code gets executed
+      let token = generateToken((req.user).toJSON()); // `req.user` contains the authenticated user
       return res.json({user: req.user, token: token});
-    });
-  }
+  });
+}

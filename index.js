@@ -4,7 +4,7 @@
  * using mongoose in the models file, and the requests are authenticated using the strategies implemented
  * using passport in the passport file. The connect method is used to connect the mongoose models to the
  * database that contains the movies and users collections that the models reference. The database is 
- * hosted on MongoDB Atlas.
+ * hosted on MongoDB Atlas. The server and endpoints are hosted on Heroku.
  */
 
 // Used to implement the database schema for requests made to the database
@@ -29,32 +29,41 @@ const cors = require('cors');
 // Used to implement validation checks on data provided by the user when submitting a registration request
 const {check, validationResult} = require('express-validator');
 
+// Connects mongoose to the myFlix database
 mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
-// Setting up the server
+// Sets up the server
 const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0',() => {
   console.log('The server is listening on port ' + port);
 });
 
-// Using morgan to log requests
+// Implements morgan to log requests
 app.use(morgan('common'));
 
-// Using express.static to serve documentation file from the public folder
+// Implements express.static to serve the documentation file from the public folder
 app.use(express.static('public'));
 
-// Using cors to allow requests from all origins
+// Implements cors to allow requests from all origins
 app.use(cors());
 
-// Calling the auth function, passing the app as the parameter
+/**
+ * POST request to the log in endpoint implemented in the auth file.
+ */ 
 auth(app);
 
-// Landing page
+/**
+ * GET request to the landing page ('/') endpoint. The response contains a text
+ * response with a welcome message. */ 
 app.get('/',(req,res) => {
   res.send('Welcome to myFlix!');
 });
 
-// Return a list of all movies
+/**
+ * GET request to the /movies endpoint. Retrieves data for all the movies in the movies collection
+ * in the database. The request is validated using the jwt strategy. The response contains either 
+ * a json object with the movie data or the error if the request was unsuccessful.
+ */
 app.get('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
   Movies.find()
   .then((movies) => {
@@ -66,7 +75,12 @@ app.get('/movies', passport.authenticate('jwt', {session: false}), (req, res) =>
   })
 });
 
-// Return data about a single movie by title:
+/**
+ * GET request to the /movies/[Title] endpoint. Retrieves data for a single movie that's title
+ * is included in the URL. The request is validated using the jwt strategy. The response contains 
+ * either a json object with the data for the movie requested or the error if the request was 
+ * unsuccessful.
+ */
 app.get('/movies/:Title', passport.authenticate('jwt', {session: false}), (req, res) => {
   Movies.findOne({Title: req.params.Title})
   .then((movie) => {
@@ -78,7 +92,11 @@ app.get('/movies/:Title', passport.authenticate('jwt', {session: false}), (req, 
   })
 });
 
-// Return the description of a genre searched for by name
+/**
+ * GET request to the /movies/genre/[Name] endpoint. Retrieves data for a movie genre that's name
+ * is included in the URL. The request is validated using the jwt strategy. The response contains 
+ * either a json object with data for the genre requested or the error if the request was unsuccessful.
+ */
 app.get('/movies/genre/:Name', passport.authenticate('jwt', {session: false}), (req, res) => {
   Movies.findOne({"Genre.Name": req.params.Name})
   .then((movie) => {
@@ -90,7 +108,12 @@ app.get('/movies/genre/:Name', passport.authenticate('jwt', {session: false}), (
   })
 });
 
-// Return the details about a director searched for by name
+/**
+ * GET request to the /movies/director/[Name] endpoint. Retrieves data for a movie director whose
+ * name is included in the URL. The request is validated using the jwt strategy. The response
+ * contains either a json object with data for the director requested or the error if the request
+ * was unsuccessful.
+ */
 app.get('/movies/director/:Name', passport.authenticate('jwt', {session: false}), (req, res) => {
   Movies.findOne({"Director.Name": req.params.Name})
   .then((movie) => {
@@ -102,7 +125,12 @@ app.get('/movies/director/:Name', passport.authenticate('jwt', {session: false})
   })
 });
 
-// Register a new user
+/**
+ * POST request to the /users endpoint. Creates a new user in the database, using the data provided in
+ * the request body, if the data meets validation requirements. If validation fails, returns a json 
+ * object containing the errors. If the registration succeeds, returns a json object containing the
+ * new user; if unsuccessful, returns the error.
+ */
 app.post('/users',
   [
     check('Username', 'Username must contain at least 5 characters.').isLength({min: 5}),
@@ -115,7 +143,6 @@ app.post('/users',
   if(!errors.isEmpty()) {
     return res.status(422).json({errors: errors.array()});
   }
-  // let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({Username: req.body.Username})
   .then((user) => {
     if(user) {
@@ -123,6 +150,7 @@ app.post('/users',
     } else {
     Users.create({
       Username: req.body.Username,
+      // Hashes password before storing in the database
       Password: Users.hashPassword(req.body.Password),
       Email: req.body.Email,
       Birthday: req.body.Birthday
@@ -138,7 +166,12 @@ app.post('/users',
   })
 });
 
-// Return an existing user's details
+/**
+ * GET request to the /users/[Username] endpoint. Retrieves data for a single user whose username
+ * is included in the URL. The request is validated using the jwt strategy. The response contains 
+ * either a json object with the data for the user requested or the error if the request was 
+ * unsuccessful.
+ */
 app.get('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOne({Username: req.params.Username}).populate('FavouriteMovies')
   .then((user) => {
@@ -150,7 +183,13 @@ app.get('/users/:Username', passport.authenticate('jwt', {session: false}), (req
   })
 });
 
-// Deregister an existing user
+/**
+ * DELETE request to the /users/[Username] endpoint. Deletes the database document for a single user 
+ * whose username is included in the URL. The request is validated using the jwt strategy. If the user
+ * cannot be found, returns a text message saying that the user does not exist. If the user is 
+ * successfully deleted, returns a text message confirming the deregistration; if the request was 
+ * unsuccessful, returns the error.
+ */
 app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOneAndDelete({Username: req.params.Username})
   .then((user) => {
@@ -166,7 +205,13 @@ app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), (
   })
 });
 
-// Update an existing user's details
+/**
+ * PUT request to the /users/[Username] endpoint. Updates the database document for a single user 
+ * whose username is included in the URL using the data provided in the request body. The request 
+ * is validated using the jwt strategy. If the data provided in the request body fails validation,
+ * returns a json object containing the errors. If the user is successfully updated, returns a json 
+ * object with the updated user; if the request was unsuccessful, returns the error.
+ */
 app.put('/users/:Username',
   [
     check('Username', 'Username must contain at least 5 characters.').isLength({min: 5}),
@@ -199,7 +244,12 @@ app.put('/users/:Username',
     })
 });
 
-// Return an existing user's favourite movies array
+/**
+ * GET request to the /users/favourites/[Username] endpoint. Retrieves favourite movies data for a 
+ * single user whose username is included in the URL. The request is validated using the jwt strategy.
+ * The response contains either a json object with the FavouriteMovies array of the user requested or
+ * the error if the request was unsuccessful.
+ */
 app.get('/users/favourites/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOne({Username: req.params.Username})
   .then((user) => {
@@ -211,7 +261,15 @@ app.get('/users/favourites/:Username', passport.authenticate('jwt', {session: fa
   })
 });
 
-// Add a movie to a user's favourites
+/**
+ * PUT request to the /users/[Username]/[MovieID] endpoint. Updates the database document for a single
+ * user whose username is included in the URL, by adding the MovieID included in the URL to the array
+ * of their favourite movies. The request is validated using the jwt strategy. If the update is
+ * successful, the mongoose populate method is then used to replace the movie IDs in the response data
+ * with the full movie data from the movies collection for each of the favourite movies. A response
+ * containing a json object with the updated favourite movie data is returned, or the error if the 
+ * request was unsuccessful.
+ */
 app.put('/users/:Username/:MovieID', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOneAndUpdate(
   {Username: req.params.Username},
@@ -227,7 +285,15 @@ app.put('/users/:Username/:MovieID', passport.authenticate('jwt', {session: fals
   })
 });
 
-// Delete a movie from a user's favourites
+/**
+ * DELETE request to the /users/[Username]/[MovieID] endpoint. Updates the database document for a single
+ * user whose username is included in the URL, by deleting the MovieID included in the URL from the array
+ * of their favourite movies. The request is validated using the jwt strategy. If the update is
+ * successful, the mongoose populate method is then used to replace the movie IDs in the response data
+ * with the full movie data from the movies collection for each of the remaining favourite movies. A 
+ * response containing a json object with the updated favourite movie data is returned, or the error if 
+ * the request was unsuccessful.
+ */
 app.delete('/users/:Username/:MovieID', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOneAndUpdate(
   {Username: req.params.Username},
@@ -243,7 +309,7 @@ app.delete('/users/:Username/:MovieID', passport.authenticate('jwt', {session: f
   })
 });
 
-// Error handling function to log errors to the console
+// Error handling function to catch any previously uncaught errors and log them to the console
 app.use((err, req, res, next) => {
   console.error(err.stack);
 }); 

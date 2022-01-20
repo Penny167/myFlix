@@ -1,5 +1,5 @@
 /**
- * @file This file implements the login route for registered users. 
+ * @file The auth file implements the login route for registered users. 
  */
 
 const passport = require('passport');

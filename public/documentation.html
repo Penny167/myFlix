@@ -5,6 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>documentation</title>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
 </head>
 
 <body>
@@ -21,32 +27,249 @@
   </p>
   <table>
     <tr>
-      <th>Description</th>
+      <th>Method</th>
       <th>URL</th>
-      <th>HTTP method</th>
-      <th>Request body data format</th>
-      <th>Response body data format </th>
+      <th>Operation</th>
+      <th>Description</th>
+      <th>Request body</th>
+      <th>Response body</th>
     </tr>
     <tr>
-      <td>Landing page</td>
+      <td>GET</td>
       <td>/</td>
-      <td>GET</td>
-      <td>No request body required</td>
-      <td>Welcome message</td>
+      <td>Read</td>
+      <td>Returns a welcome message</td>
+      <td>None</td>
+      <td>Text: 'Welcome to myFlix!'</td>
     </tr>
     <tr>
-      <td>Returns a list of all movies</td>
+      <td>POST</td>
+      <td>/login/[Username, password]</td>
+      <td>Create</td>
+      <td>Logs in a registered user and creates an authorisation token</td>
+      <td>None</td>
+      <td>JSON object with two properties: user - the logged in user object; token - string containing the authorisation token</td>
+    </tr>
+    <tr>
+      <td>POST</td>
+      <td>/users</td>
+      <td>Create</td>
+      <td>Registers a new user</td>
+      <td>A JSON object with data about the user to be registered:
+        {
+          "Username": "lottiecollin",
+          "Password": "woofwoof2",
+          "Email": "lottie@gmail.com",
+          "Birthday": "02/02/2019"
+        }
+      </td>
+      <td>A JSON object with the new user’s details:
+        {
+          "FavouriteMovies": [],
+          "_id": "61ed9db750432700168cdc38",
+          "Username": "lottiecollin",
+          "Password": "$2b$10$S8hXRfDmakJcF.oK/0OpQeELk5LR4jHJKqJpk5vzsUhc7A8A8jRzi",
+          "Email": "lottie@gmail.com",
+          "Birthday": "2019-02-02T00:00:00.000Z",
+          "__v": 0
+        } 
+      </td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/users/[Username]</td>
+      <td>Read</td>
+      <td>Returns a user record for a named user</td>
+      <td>None</td>
+      <td>JSON object containing details for the named user.
+        {
+          "FavouriteMovies": [
+              {
+                  "Genre": {
+                      "Name": "Romance",
+                      "Description": "Romance films centre on passion and emotion, where the romantic, affectionate involvement of the main characters and the journey that their love takes forms the main plot focus."
+                  },
+                  "Director": {
+                      "Name": "David Lean",
+                      "Bio": "Sir David Lean CBE was an English film director, producer, screenwriter and editor. Widely considered one of the most influential directors of all time, Lean directed large-scale epics including The Bridge on the River Kwai, Lawrence of Arabia, Doctor Zhivago, and A Passage to India.",
+                      "Birth": "1908",
+                      "Death": "1991"
+                  },
+                  "_id": "60a048f225deaba7cf0a2f38",
+                  "Title": "Dr Zhivago",
+                  "Description": "The life of a Russian physician and poet who, although married to another, falls in love with a political activist's wife and experiences hardship during World War I and then the October Revolution.",
+                  "ImagePath": "https://m.media-amazon.com/images/M/MV5BNzdmZTk4MTktZmExNi00OWEwLTgxZDctNTE4NWMwNjc1Nzg2XkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_UX182_CR0,0,182,268_AL_.jpg",
+                  "Featured": false
+              },
+              {
+                  "Genre": {
+                      "Name": "Romance",
+                      "Description": "Romance films centre on passion and emotion, where the romantic, affectionate involvement of the main characters and the journey that their love takes forms the main plot focus."
+                  },
+                  "Director": {
+                      "Name": "Sydney Pollack",
+                      "Bio": "Sydney Irwin Pollack was an American film director, producer and actor. Pollack directed more than 20 films and 10 television shows, acted in over 30 movies or shows and produced over 44 films.",
+                      "Birth": "1934",
+                      "Death": "2008"
+                  },
+                  "_id": "60a10bbd8e923350a5340b03",
+                  "Title": "Out of Africa",
+                  "Description": "In 20th-century colonial Kenya, a Danish plantation owner has a passionate love affair with a free-spirited big-game hunter.",
+                  "ImagePath": "https://m.media-amazon.com/images/M/MV5BMTc5Y2NiZWQtZGY4YS00NDI4LThhM2ItMDdhYzFlNzY1NmM0XkEyXkFqcGdeQXVyMTA0MjU0Ng@@._V1_UX182_CR0,0,182,268_AL_.jpg",
+                  "Featured": false
+              }
+          ],
+          "_id": "61d8708589294000169b69f5",
+          "Username": "shortername",
+          "Password": "$2b$10$LoEbEL4dz7.oZe9EiZ9U8.UtEeOjgaEJDjpGlEswiV8/bpXqC1yeu",
+          "Email": "pennygraham100@gmail.com",
+          "Birthday": "2022-01-01T00:00:00.000Z",
+          "__v": 0
+      }
+      </td>
+    </tr>
+    <tr>
+      <td>PUT</td>
+      <td>/users/[Username]</td>
+      <td>Update</td>
+      <td>Updates a user record for a named user</td>
+      <td>A JSON object with the following fields completed, with either new values or existing values for fields that remain unchanged:
+        {
+        Username:
+        Password:
+        Email:
+        Birthday:
+      </td>
+      <td>A JSON object with the user’s details reflecting any changes made by the request:
+        {
+        _id:
+        Username:
+        Password:
+        Email:
+        Birthday:
+        FavouriteMovies: []
+        }
+      </td>
+    </tr>
+    <tr>
+      <td>DELETE</td>
+      <td>/users/[Username]</td>
+      <td>Delete</td>
+      <td>Deletes a user record for a named user</td>
+      <td>None</td>
+      <td>Text: '[Username] has been deregistered'</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/users/favourites/[Username]</td>
+      <td>Read</td>
+      <td>Retrieves favourite movies data for a 
+        * single user whose username is included in the URL. Returns the array of favourite movie IDs for a named user</td>
+      <td>None</td>
+      <td>JSON object containing the array of favourite movie IDs</td>
+    </tr>
+    <tr>
+      <td>PUT</td>
+      <td>/users/[Username]/[MovieID]</td>
+      <td>Update</td>
+      <td>Adds a movie to a named user's array of favourites. Updates the database document for a single
+        * user whose username is included in the URL, by adding the MovieID included in the URL to the array
+        * of their favourite movies. </td>
+      <td>None</td>
+      <td>A JSON object containing an array of the user's updated favourite movies, populated with the corresponding records from the movies collection
+        [
+    {
+        "Genre": {
+            "Name": "Biopic",
+            "Description": "Biopics, are films that depict and dramatise the life of an important historical personage from the past or present era."
+        },
+        "Director": {
+            "Name": "Shekhar Kapur",
+            "Bio": "Shekhar Kulbhushan Kapoor is an Indian film director, actor, and film producer, known for his works in Hindi cinema and international cinema.",
+            "Birth": "1945"
+        },
+        "_id": "60a110a28e923350a5340b06",
+        "Title": "Elizabeth",
+        "Description": "Following her ascension to the throne, Elizabeth faces many challenges during her reign over England. Amidst the political, administrative and personal issues, she struggles to learn to be a monarch.",
+        "ImagePath": "https://m.media-amazon.com/images/M/MV5BNWM4NmYwNTYtZDJhNS00YTIwLWJhNjAtNzAxNTEzMzAxN2ZiL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_UX182_CR0,0,182,268_AL_.jpg",
+        "Featured": false
+    },
+    {
+        "Genre": {
+            "Name": "Romance",
+            "Description": "Romance films centre on passion and emotion, where the romantic, affectionate involvement of the main characters and the journey that their love takes forms the main plot focus."
+        },
+        "Director": {
+            "Name": "David Lean",
+            "Bio": "Sir David Lean CBE was an English film director, producer, screenwriter and editor. Widely considered one of the most influential directors of all time, Lean directed large-scale epics including The Bridge on the River Kwai, Lawrence of Arabia, Doctor Zhivago, and A Passage to India.",
+            "Birth": "1908",
+            "Death": "1991"
+        },
+        "_id": "60a048f225deaba7cf0a2f38",
+        "Title": "Dr Zhivago",
+        "Description": "The life of a Russian physician and poet who, although married to another, falls in love with a political activist's wife and experiences hardship during World War I and then the October Revolution.",
+        "ImagePath": "https://m.media-amazon.com/images/M/MV5BNzdmZTk4MTktZmExNi00OWEwLTgxZDctNTE4NWMwNjc1Nzg2XkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_UX182_CR0,0,182,268_AL_.jpg",
+        "Featured": false
+    },
+    {
+        "Genre": {
+            "Name": "Romance",
+            "Description": "Romance films centre on passion and emotion, where the romantic, affectionate involvement of the main characters and the journey that their love takes forms the main plot focus."
+        },
+        "Director": {
+            "Name": "Sydney Pollack",
+            "Bio": "Sydney Irwin Pollack was an American film director, producer and actor. Pollack directed more than 20 films and 10 television shows, acted in over 30 movies or shows and produced over 44 films.",
+            "Birth": "1934",
+            "Death": "2008"
+        },
+        "_id": "60a10bbd8e923350a5340b03",
+        "Title": "Out of Africa",
+        "Description": "In 20th-century colonial Kenya, a Danish plantation owner has a passionate love affair with a free-spirited big-game hunter.",
+        "ImagePath": "https://m.media-amazon.com/images/M/MV5BMTc5Y2NiZWQtZGY4YS00NDI4LThhM2ItMDdhYzFlNzY1NmM0XkEyXkFqcGdeQXVyMTA0MjU0Ng@@._V1_UX182_CR0,0,182,268_AL_.jpg",
+        "Featured": false
+    },
+    {
+        "Genre": {
+            "Name": "Biopic",
+            "Description": "Biopics, are films that depict and dramatise the life of an important historical personage from the past or present era."
+        },
+        "Director": {
+            "Name": "Shekhar Kapur",
+            "Bio": "Shekhar Kulbhushan Kapoor is an Indian film director, actor, and film producer, known for his works in Hindi cinema and international cinema.",
+            "Birth": "1945"
+        },
+        "_id": "60a110a28e923350a5340b06",
+        "Title": "Elizabeth",
+        "Description": "Following her ascension to the throne, Elizabeth faces many challenges during her reign over England. Amidst the political, administrative and personal issues, she struggles to learn to be a monarch.",
+        "ImagePath": "https://m.media-amazon.com/images/M/MV5BNWM4NmYwNTYtZDJhNS00YTIwLWJhNjAtNzAxNTEzMzAxN2ZiL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_UX182_CR0,0,182,268_AL_.jpg",
+        "Featured": false
+    }
+]
+      </td>
+    </tr>
+    <tr>
+      <td>DELETE</td>
+      <td>/users/[Username]/[MovieID]</td>
+      <td>Delete</td>
+      <td>Removes a movie from a named user's array of favourites</td>
+      <td>None</td>
+      <td>A JSON object containing an array of the user's updated favourite movies, populated with the corresponding records from the movies collection</td>
+    </tr>
+    <tr>
+      <td>GET</td>
       <td>/movies</td>
-      <td>GET</td>
-      <td>No request body required</td>
-      <td>JSON object with available data on all movies</td>
+      <td>Read</td>
+      <td>Returns the records for all the movies in the movies collection in the database.</td>
+      <td>None</td>
+      <td>JSON object containing array of movie records</td>
     </tr>
     <tr>
-      <td>Returns data about a single movie by title</td>
-      <td>/movies/[Title]</td>
       <td>GET</td>
-      <td>No request body required</td>
-      <td>JSON object with available data about the movie requested:
+      <td>/movies/[Title]</td>
+      <td>Read</td>
+      <td>Returns a movie record for a movie specified by title</td>
+      <td>None</td>
+      <td>JSON object containing the record for the movie requested:
         {
         id:
         Title:
@@ -67,18 +290,20 @@
         </td>
     </tr>
     <tr>
-      <td>Returns the description of a movie genre searched for by name</td>
-      <td>/movies/genre/[Name]</td>
       <td>GET</td>
-      <td>No request body required</td>
-      <td>A text message returning the description of the genre selected</td>
+      <td>/movies/genre/[Name]</td>
+      <td>Read</td>
+      <td>Returns the description of a movie genre searched for by name</td>
+      <td>None</td>
+      <td>Text description of the genre selected</td>
     </tr>
     <tr>
-      <td>Returns details about a director searched for by name</td>
-      <td>/movies/director/[Name]</td>
       <td>GET</td>
-      <td>No request body required</td>
-      <td>JSON object with details about the director requested:
+      <td>/movies/director/[Name]</td>
+      <td>Read</td>
+      <td>Returns the data about a director searched for by name</td>
+      <td>None</td>
+      <td>JSON object with details of the director requested:
         {
         Name:
         Bio:
@@ -86,79 +311,6 @@
         Death:
         }
       </td>
-    </tr>
-    <tr>
-      <td>Registers a new user</td>
-      <td>/users</td>
-      <td>POST</td>
-      <td>A JSON object with data about the user to be registered:
-        {
-        Username:
-        Password:
-        Email:
-        Birthday:
-        }
-      </td>
-      <td>A JSON object with the new user’s details:
-        {
-        _id:
-        Username:
-        Password:
-        Email:
-        Birthday:
-        FavouriteMovies: []
-        }
-      </td>
-    </tr>
-    <tr>
-      <td>Logs in a registered user</td>
-      <td>/login</td>
-      <td>POST</td>
-      <td>No request body required; user enters username and password into fields provided</td>
-      <td>JSON object with user's details and a json web token for authentication of all subsequent requests whilst logged in</td>
-    </tr>
-    <tr>
-      <td>Updates an existing user's details</td>
-      <td>/users/[Username]</td>
-      <td>PUT</td>
-      <td>A JSON object with the following fields completed, with either new values or existing values for fields that remain unchanged:
-        {
-        Username:
-        Password:
-        Email:
-        Birthday:
-      </td>
-      <td>A JSON object with the user’s details reflecting any changes made by the request:
-        {
-        _id:
-        Username:
-        Password:
-        Email:
-        Birthday:
-        FavouriteMovies: []
-        }
-      </td>
-    </tr>
-    <tr>
-      <td>Adds a movie to a user's list of favourites</td>
-      <td>/users/[Username]/[MovieID]</td>
-      <td>PUT</td>
-      <td>No request body required</td>
-      <td>A JSON object with the user's updated list of favourites: []</td>
-    </tr>
-    <tr>
-      <td>Removes a movie from a user's list of favourites</td>
-      <td>/users/[Username]/[MovieID]</td>
-      <td>DELETE</td>
-      <td>No request body required</td>
-      <td>A JSON object with the user's updated list of favourites: []</td>
-    </tr>
-    <tr>
-      <td>Deregisters an existing user</td>
-      <td>/users/[Username]</td>
-      <td>DELETE</td>
-      <td>No request body required</td>
-      <td>A text message confirming that the user has been deregistered</td>
     </tr>
   </table>  
 </body>

@@ -1,7 +1,8 @@
 /**
  * @file The auth file implements the login route for registered users.
  * @requires passport Used to create strategies for authenticating and authorising requests to the Api endpoints.
- * @requires jwt Used to create json web tokens for authorising requests to protected endpoints. 
+ * @requires './passport.js' The file where the passport strategies are implemented.
+ * @requires jsonwebtoken Used to create json web tokens for authorising requests to protected endpoints. 
  */
 
 const passport = require('passport');

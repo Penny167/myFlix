@@ -4,13 +4,13 @@
  * models file and are authenticated using strategies implemented in the passport file. The connect method 
  * establishes a connection between mongoose and the database, which is hosted on MongoDB Atlas. The 
  * server and endpoints are hosted on Heroku.
- 
+
  * @requires mongoose Connects the app to the database and implements data schemas using models.
- * @requires Models File where data schemas and models are defined.
+ * @requires './models.js' The file where data schemas and models are defined.
  * @requires express Used to create an express application.
  * @requires morgan Used to log requests made to the database.
  * @requires passport Used to create strategies for authenticating and authorising requests to the Api endpoints.
- * @requires auth File implementing the user login route.
+ * @requires './auth.js' The file that implements the user login route.
  * @requires cors Used to control origins from which requests to the server can be made.
  * @requires express-validator Used to perform validation on data provided when creating or updating a user.
  */

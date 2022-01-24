@@ -1,16 +1,20 @@
 /**
- * @file This file implements two passport strategies that are used to authenticate requests to the Api
- * endpoints. The local strategy is used when a user logs in; it validates the username and password
- * against the users collection in the database. For subsequent requests, the JWT strategy is used.
- * This validates the request by decoding the Json Web Token returned to the user on a successful login,
- * and then checking the user ID from the payload against the users collection in the database.
+ * @file This file implements two passport strategies that are used to authenticate requests to the 
+ * Api endpoints. The local strategy is used when a user logs in, and validates the username and 
+ * password against the users collection in the database. For subsequent requests the JWT strategy is 
+ * used. This validates the request by decoding the Json Web Token returned to the user on a successful 
+ * login, then checking the user ID from the payload against the users collection in the database.
+ 
+ * @requires passport Used to create strategies for authenticating and authorising requests to the Api endpoints.
+ * @requires passport-local Used to create a local strategy.
+ * @requires passport-jwt Used to create a jwt strategy and to extract tokens from requests.
+ * @requires './models.js' The file where data schemas and models are defined.
  */
 
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const JWTStrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
-
 const Models = require('./models.js');
 const Users = Models.User;
 
@@ -20,7 +24,7 @@ const Users = Models.User;
  */
 passport.use(new LocalStrategy(
   {
-  // Parameters: Changing default request parameter names becaused capitalized versions will be used
+  // Parameters: Changing default request parameter names becaused capitalised versions will be used
   usernameField: 'Username',
   passwordField: 'Password'
 },

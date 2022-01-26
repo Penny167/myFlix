@@ -9,310 +9,332 @@
     table, th, td {
       border: 1px solid black;
       border-collapse: collapse;
+      font-size: 14px;
+      padding: 5px;
+      margin: 20px;
+    }
+    body {
+      margin: 25px;
+    }
+    footer {
+      text-align: center;
     }
   </style>
 </head>
 
 <body>
-  <h1>myFlixapi</h1>
+  <h1>myFlix</h1>
   <h2>Overview</h2>
-  <p>The myFlixapi is a REST API that supports the "myFlix" movie web application, by providing
-    access to the server-side database. This contains information about movies, including: titles, movie descriptions
-    and information about genres and directors.
+  <p>myFlix is a REST API that provides access to the myFlix database. The database contains a movies collection that holds data for a 
+    selection of classic films. Each record includes a title, synopsis, image (from the IMDb), data about the director and data about
+    the movie genre. There is also a users collection that holds data about registered users of any applications that consume the API. A variety
+    of CRUD operations can be performed on the data by sending HTTP requests to the API endpoints. Details are provided in the following table.
   </p>
   <h2>Table of API endpoints</h2>
-  <p>The following table lists all available endpoints including: a high level description of the data available,
-    URL, http method, format required for requests and format of responses. Request parameters within the URL are
-    indicated with square brackets.  
+  <p>The table lists all the available endpoints and for each endpoint provides the following information: the URL, a description
+    of the operation fulfilled by the request, the HTTP method used in the request, the operation type, whether a request body is required and, if so,
+    an example of the format used; the format of responses received, and an example response. Request parameters included
+    within the URLs are indicated using square brackets.
   </p>
+  <br>
   <table>
     <tr>
-      <th>Method</th>
       <th>URL</th>
-      <th>Operation</th>
       <th>Description</th>
+      <th>Method</th>
+      <th>Operation</th>
       <th>Request body</th>
-      <th>Response body</th>
+      <th>Response format</th>
+      <th>Example response</th>
     </tr>
     <tr>
-      <td>GET</td>
       <td>/</td>
-      <td>Read</td>
       <td>Returns a welcome message</td>
-      <td>None</td>
-      <td>Text: 'Welcome to myFlix!'</td>
-    </tr>
-    <tr>
-      <td>POST</td>
-      <td>/login/[Username, password]</td>
-      <td>Create</td>
-      <td>Logs in a registered user and creates an authorisation token</td>
-      <td>None</td>
-      <td>JSON object with two properties: user - the logged in user object; token - string containing the authorisation token</td>
-    </tr>
-    <tr>
-      <td>POST</td>
-      <td>/users</td>
-      <td>Create</td>
-      <td>Registers a new user</td>
-      <td>A JSON object with data about the user to be registered:
-        {
-          "Username": "lottiecollin",
-          "Password": "woofwoof2",
-          "Email": "lottie@gmail.com",
-          "Birthday": "02/02/2019"
-        }
-      </td>
-      <td>A JSON object with the new user’s details:
-        {
-          "FavouriteMovies": [],
-          "_id": "61ed9db750432700168cdc38",
-          "Username": "lottiecollin",
-          "Password": "$2b$10$S8hXRfDmakJcF.oK/0OpQeELk5LR4jHJKqJpk5vzsUhc7A8A8jRzi",
-          "Email": "lottie@gmail.com",
-          "Birthday": "2019-02-02T00:00:00.000Z",
-          "__v": 0
-        } 
-      </td>
-    </tr>
-    <tr>
       <td>GET</td>
-      <td>/users/[Username]</td>
       <td>Read</td>
-      <td>Returns a user record for a named user</td>
       <td>None</td>
-      <td>JSON object containing details for the named user.
-        {
-          "FavouriteMovies": [
-              {
-                  "Genre": {
-                      "Name": "Romance",
-                      "Description": "Romance films centre on passion and emotion, where the romantic, affectionate involvement of the main characters and the journey that their love takes forms the main plot focus."
-                  },
-                  "Director": {
-                      "Name": "David Lean",
-                      "Bio": "Sir David Lean CBE was an English film director, producer, screenwriter and editor. Widely considered one of the most influential directors of all time, Lean directed large-scale epics including The Bridge on the River Kwai, Lawrence of Arabia, Doctor Zhivago, and A Passage to India.",
-                      "Birth": "1908",
-                      "Death": "1991"
-                  },
-                  "_id": "60a048f225deaba7cf0a2f38",
-                  "Title": "Dr Zhivago",
-                  "Description": "The life of a Russian physician and poet who, although married to another, falls in love with a political activist's wife and experiences hardship during World War I and then the October Revolution.",
-                  "ImagePath": "https://m.media-amazon.com/images/M/MV5BNzdmZTk4MTktZmExNi00OWEwLTgxZDctNTE4NWMwNjc1Nzg2XkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_UX182_CR0,0,182,268_AL_.jpg",
-                  "Featured": false
-              },
-              {
-                  "Genre": {
-                      "Name": "Romance",
-                      "Description": "Romance films centre on passion and emotion, where the romantic, affectionate involvement of the main characters and the journey that their love takes forms the main plot focus."
-                  },
-                  "Director": {
-                      "Name": "Sydney Pollack",
-                      "Bio": "Sydney Irwin Pollack was an American film director, producer and actor. Pollack directed more than 20 films and 10 television shows, acted in over 30 movies or shows and produced over 44 films.",
-                      "Birth": "1934",
-                      "Death": "2008"
-                  },
-                  "_id": "60a10bbd8e923350a5340b03",
-                  "Title": "Out of Africa",
-                  "Description": "In 20th-century colonial Kenya, a Danish plantation owner has a passionate love affair with a free-spirited big-game hunter.",
-                  "ImagePath": "https://m.media-amazon.com/images/M/MV5BMTc5Y2NiZWQtZGY4YS00NDI4LThhM2ItMDdhYzFlNzY1NmM0XkEyXkFqcGdeQXVyMTA0MjU0Ng@@._V1_UX182_CR0,0,182,268_AL_.jpg",
-                  "Featured": false
-              }
-          ],
-          "_id": "61d8708589294000169b69f5",
-          "Username": "shortername",
-          "Password": "$2b$10$LoEbEL4dz7.oZe9EiZ9U8.UtEeOjgaEJDjpGlEswiV8/bpXqC1yeu",
-          "Email": "pennygraham100@gmail.com",
-          "Birthday": "2022-01-01T00:00:00.000Z",
-          "__v": 0
+      <td>Text</td>
+      <td>Welcome to myFlix!</td>
+    </tr>
+    <tr>
+      <td>/login?[Username=username&Password=password]</td>
+      <td>Logs in a registered user and creates an authorisation token</td>
+      <td>POST</td>
+      <td>Create</td>
+      <td>None. A username and password must be submitted as request parameters. By entering these via a form in the front end application, they are attached as a query string to the URL</td>
+      <td>A JSON object containing the logged in user and the authorisation token. Passwords returned from the database are always hashed</td>
+      <td>{<br>
+        "user":{<br>
+          "FavouriteMovies":["movieid1","movieid2"],<br>
+          "_id":"mydatabaseid",<br>
+          "Username":"myusername",<br>
+          "Password":"myh@$hedp@$$w0rd",<br>
+          "Email":"myemail@gmail.com",<br>
+          "Birthday":"2022-01-01T00:00:00.000Z",<br>
+          "__v":0<br>
+        },<br>
+        "token":"exampletoken"<br>
       }
       </td>
     </tr>
     <tr>
-      <td>PUT</td>
-      <td>/users/[Username]</td>
-      <td>Update</td>
-      <td>Updates a user record for a named user</td>
-      <td>A JSON object with the following fields completed, with either new values or existing values for fields that remain unchanged:
-        {
-        Username:
-        Password:
-        Email:
-        Birthday:
+      <td>/users</td>
+      <td>Registers a new user</td>
+      <td>POST</td>
+      <td>Create</td>
+      <td>A JSON object containing the following fields:<br><br>
+        {<br>
+          "Username": "myusername",<br>
+          "Password": "mypassword",<br>
+          "Email": "myemail@gmail.com",<br>
+          "Birthday": "01/01/2022"<br>
+        }
       </td>
-      <td>A JSON object with the user’s details reflecting any changes made by the request:
-        {
-        _id:
-        Username:
-        Password:
-        Email:
-        Birthday:
-        FavouriteMovies: []
+      <td>A JSON object containing the registered user</td>
+      <td>{<br>
+          "FavouriteMovies": [],<br>
+          "_id": "mydatabaseid",<br>
+          "Username": "myusername",<br>
+          "Password": "myh@$hedp@$$w0rd",<br>
+          "Email": "myemail@gmail.com",<br>
+          "Birthday": "2022-01-01T00:00:00.000Z",<br>
+          "__v": 0<br>
+        } 
+      </td>
+    </tr>
+    <tr>
+      <td>/users/[Username]</td>
+      <td>Returns the user record for a named user</td>
+      <td>GET</td>
+      <td>Read</td>
+      <td>None</td>
+      <td>A JSON object containing the user record. For this endpoint, the response returned contains an array with the full movie record for each of the user's favourite movies instead of an array with just the movie IDs</td>
+      <td>
+        {<br>
+          "FavouriteMovies":<br>
+           [{<br>
+             "Genre": {"Name": "Agenre", "Description": "This text describes the genre."},<br>
+              "Director": {"Name": "A Director", "Bio": "This text is a bio of the director.", "Birth": "1900", "Death": "2000"},<br>
+              "_id": "movieid1",<br>
+                "Title": "A movie",<br>
+                "Description": "This text is a synopsis.",<br>
+                "ImagePath": "https://path.jpg",<br>
+                "Featured": false<br>
+           }],<br>
+          "_id": "mydatabaseid",<br>
+          "Username": "myusername",<br>
+          "Password": "myh@$hedp@$$w0rd",<br>
+          "Email": "myemail@gmail.com",<br>
+          "Birthday": "2022-01-01T00:00:00.000Z",<br>
+          "__v": 0<br>
         }
       </td>
     </tr>
     <tr>
-      <td>DELETE</td>
       <td>/users/[Username]</td>
-      <td>Delete</td>
-      <td>Deletes a user record for a named user</td>
-      <td>None</td>
-      <td>Text: '[Username] has been deregistered'</td>
-    </tr>
-    <tr>
-      <td>GET</td>
-      <td>/users/favourites/[Username]</td>
-      <td>Read</td>
-      <td>Retrieves favourite movies data for a 
-        * single user whose username is included in the URL. Returns the array of favourite movie IDs for a named user</td>
-      <td>None</td>
-      <td>JSON object containing the array of favourite movie IDs</td>
-    </tr>
-    <tr>
+      <td>Updates the user record for a named user</td>
       <td>PUT</td>
-      <td>/users/[Username]/[MovieID]</td>
       <td>Update</td>
-      <td>Adds a movie to a named user's array of favourites. Updates the database document for a single
-        * user whose username is included in the URL, by adding the MovieID included in the URL to the array
-        * of their favourite movies. </td>
+      <td>A JSON object containing the following fields:<br><br>
+        {<br>
+          "Username": "myusername",<br>
+          "Password": "mypassword",<br>
+          "Email": "myemail@gmail.com",<br>
+          "Birthday": "01/01/2022"<br>
+        }
+      </td>
+      <td>A JSON object with the updated user details </td>
+      <td>
+        {<br>
+          "FavouriteMovies": [],<br>
+          "_id": "mydatabaseid",<br>
+          "Username": "mynewusername",<br>
+          "Password": "mynewh@$hedp@$$w0rd",<br>
+          "Email": "myemail@gmail.com",<br>
+          "Birthday": "2022-01-01T00:00:00.000Z",<br>
+          "__v": 0<br>
+        } 
+      </td>
+    </tr>
+    <tr>
+      <td>/users/[Username]</td>
+      <td>Deletes the user record for a named user</td>
+      <td>DELETE</td>
+      <td>Delete</td>
       <td>None</td>
-      <td>A JSON object containing an array of the user's updated favourite movies, populated with the corresponding records from the movies collection
-        [
-    {
+      <td>Text</td>
+      <td>[Username] has been deregistered</td>
+    </tr>
+    <tr>
+      <td>/users/favourites/[Username]</td>
+      <td>Returns an array of favourite movie IDs for the named user</td>
+      <td>GET</td>
+      <td>Read</td>
+      <td>None</td>
+      <td>An array of favourite movie IDs</td>
+      <td>["movieid1","movieid2"]</td>
+    </tr>
+    <tr>
+      <td>/users/[Username]/[MovieID]</td>
+      <td>Adds a movie ID to the named user's array of favourite movies</td>
+      <td>PUT</td>
+      <td>Update</td>
+      <td>None</td>
+      <td>An array of the user's updated favourite movies. For this endpoint, the response returned contains an array with the full movie record for each of the user's favourite movies instead of an array with just the movie IDs</td>
+      <td>
+        [<br>
+    {<br>
         "Genre": {
-            "Name": "Biopic",
-            "Description": "Biopics, are films that depict and dramatise the life of an important historical personage from the past or present era."
-        },
+            "Name": "Agenre",
+            "Description": "This text describes the genre."
+        },<br>
         "Director": {
-            "Name": "Shekhar Kapur",
-            "Bio": "Shekhar Kulbhushan Kapoor is an Indian film director, actor, and film producer, known for his works in Hindi cinema and international cinema.",
-            "Birth": "1945"
-        },
-        "_id": "60a110a28e923350a5340b06",
-        "Title": "Elizabeth",
-        "Description": "Following her ascension to the throne, Elizabeth faces many challenges during her reign over England. Amidst the political, administrative and personal issues, she struggles to learn to be a monarch.",
-        "ImagePath": "https://m.media-amazon.com/images/M/MV5BNWM4NmYwNTYtZDJhNS00YTIwLWJhNjAtNzAxNTEzMzAxN2ZiL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_UX182_CR0,0,182,268_AL_.jpg",
-        "Featured": false
-    },
-    {
+            "Name": "A Director",
+            "Bio": "This text is a bio of the director.",
+            "Birth": "2000"
+        },<br>
+        "_id": "movieid1",<br>
+        "Title": "A movie",<br>
+        "Description": "This text is a synopsis.",<br>
+        "ImagePath": "https://path.jpg",<br>
+        "Featured": false<br>
+    },<br>
+    {<br>
         "Genre": {
-            "Name": "Romance",
-            "Description": "Romance films centre on passion and emotion, where the romantic, affectionate involvement of the main characters and the journey that their love takes forms the main plot focus."
-        },
+            "Name": "Another genre",
+            "Description": "This text describes the genre."
+        },<br>
         "Director": {
-            "Name": "David Lean",
-            "Bio": "Sir David Lean CBE was an English film director, producer, screenwriter and editor. Widely considered one of the most influential directors of all time, Lean directed large-scale epics including The Bridge on the River Kwai, Lawrence of Arabia, Doctor Zhivago, and A Passage to India.",
-            "Birth": "1908",
-            "Death": "1991"
-        },
-        "_id": "60a048f225deaba7cf0a2f38",
-        "Title": "Dr Zhivago",
-        "Description": "The life of a Russian physician and poet who, although married to another, falls in love with a political activist's wife and experiences hardship during World War I and then the October Revolution.",
-        "ImagePath": "https://m.media-amazon.com/images/M/MV5BNzdmZTk4MTktZmExNi00OWEwLTgxZDctNTE4NWMwNjc1Nzg2XkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_UX182_CR0,0,182,268_AL_.jpg",
-        "Featured": false
-    },
-    {
-        "Genre": {
-            "Name": "Romance",
-            "Description": "Romance films centre on passion and emotion, where the romantic, affectionate involvement of the main characters and the journey that their love takes forms the main plot focus."
-        },
-        "Director": {
-            "Name": "Sydney Pollack",
-            "Bio": "Sydney Irwin Pollack was an American film director, producer and actor. Pollack directed more than 20 films and 10 television shows, acted in over 30 movies or shows and produced over 44 films.",
-            "Birth": "1934",
-            "Death": "2008"
-        },
-        "_id": "60a10bbd8e923350a5340b03",
-        "Title": "Out of Africa",
-        "Description": "In 20th-century colonial Kenya, a Danish plantation owner has a passionate love affair with a free-spirited big-game hunter.",
-        "ImagePath": "https://m.media-amazon.com/images/M/MV5BMTc5Y2NiZWQtZGY4YS00NDI4LThhM2ItMDdhYzFlNzY1NmM0XkEyXkFqcGdeQXVyMTA0MjU0Ng@@._V1_UX182_CR0,0,182,268_AL_.jpg",
-        "Featured": false
-    },
-    {
-        "Genre": {
-            "Name": "Biopic",
-            "Description": "Biopics, are films that depict and dramatise the life of an important historical personage from the past or present era."
-        },
-        "Director": {
-            "Name": "Shekhar Kapur",
-            "Bio": "Shekhar Kulbhushan Kapoor is an Indian film director, actor, and film producer, known for his works in Hindi cinema and international cinema.",
-            "Birth": "1945"
-        },
-        "_id": "60a110a28e923350a5340b06",
-        "Title": "Elizabeth",
-        "Description": "Following her ascension to the throne, Elizabeth faces many challenges during her reign over England. Amidst the political, administrative and personal issues, she struggles to learn to be a monarch.",
-        "ImagePath": "https://m.media-amazon.com/images/M/MV5BNWM4NmYwNTYtZDJhNS00YTIwLWJhNjAtNzAxNTEzMzAxN2ZiL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_UX182_CR0,0,182,268_AL_.jpg",
-        "Featured": false
-    }
+            "Name": "Another Director",
+            "Bio": "This text is a bio of the director.",
+            "Birth": "1900",
+            "Death": "2000"
+        },<br>
+        "_id": "movieid2",<br>
+        "Title": "Another movie",<br>
+        "Description": "This text is a synopsis.",<br>
+        "ImagePath": "https://path.jpg",<br>
+        "Featured": false<br>
+    }<br>
 ]
       </td>
     </tr>
     <tr>
-      <td>DELETE</td>
       <td>/users/[Username]/[MovieID]</td>
+      <td>Removes a movie ID from the named user's array of favourite movies</td>
+      <td>DELETE</td>
       <td>Delete</td>
-      <td>Removes a movie from a named user's array of favourites</td>
       <td>None</td>
-      <td>A JSON object containing an array of the user's updated favourite movies, populated with the corresponding records from the movies collection</td>
+      <td>An array of the user's updated favourite movies. For this endpoint, the response returned contains an array with the full movie record for each of the user's favourite movies instead of an array with just the movie IDs</td>
+      <td>
+        [<br>
+    {<br>
+        "Genre": {
+            "Name": "Agenre",
+            "Description": "This text describes the genre."
+        },<br>
+        "Director": {
+            "Name": "A Director",
+            "Bio": "This text is a bio of the director.",
+            "Birth": "2000"
+        },<br>
+        "_id": "movieid1",<br>
+        "Title": "A movie",<br>
+        "Description": "This text is a synopsis.",<br>
+        "ImagePath": "https://path.jpg",<br>
+        "Featured": false<br>
+    }<br>
+]
+      </td>
     </tr>
     <tr>
-      <td>GET</td>
       <td>/movies</td>
+      <td>Returns the records for all the movies in the movies collection in the database</td>
+      <td>GET</td>
       <td>Read</td>
-      <td>Returns the records for all the movies in the movies collection in the database.</td>
       <td>None</td>
-      <td>JSON object containing array of movie records</td>
+      <td>An array of movie records</td>
+      <td>
+        [<br>
+        {<br>
+          "Genre":{"Name":"Agenre","Description":"This text describes the genre."},<br>
+          "Director":{"Name":"A Director","Bio":"This text is a bio of the director.",
+          "Birth":"1900",
+          "Death":"2000"},<br>
+          "_id":"movieid1",<br>
+          "Title":"A movie",<br>
+          "Description":"This text is a synopsis.",<br>
+          "ImagePath":"https://path.jpg",<br>
+          "Featured":true<br>
+        },<br>
+        {<br>
+          "Genre":{"Name":"Anothergenre","Description":"This text describes the genre."},<br>
+          "Director":{"Name":"Another Director","Bio":"This text is a bio of the director.",
+          "Birth":"1900",
+          "Death":"2000"},<br>
+          "_id":"movieid2",<br>
+          "Title":"Another movie",<br>
+          "Description":"This text is a synopsis.",<br>
+          "ImagePath":"https://path.jpg",<br>
+          "Featured":false<br>
+        }<br>
+        ]
+      </td>
     </tr>
     <tr>
-      <td>GET</td>
       <td>/movies/[Title]</td>
-      <td>Read</td>
-      <td>Returns a movie record for a movie specified by title</td>
-      <td>None</td>
-      <td>JSON object containing the record for the movie requested:
-        {
-        id:
-        Title:
-        Description:
-        Genre: {
-          Name:
-          Description:
-        }
-        Director: {
-          Name:
-          Bio:
-          Birth:
-          Death:
-        }
-        ImagePath:
-        Featured:
-        }
-        </td>
-    </tr>
-    <tr>
+      <td>Returns the movie record for a movie specified by title</td>
       <td>GET</td>
-      <td>/movies/genre/[Name]</td>
       <td>Read</td>
-      <td>Returns the description of a movie genre searched for by name</td>
       <td>None</td>
-      <td>Text description of the genre selected</td>
-    </tr>
-    <tr>
-      <td>GET</td>
-      <td>/movies/director/[Name]</td>
-      <td>Read</td>
-      <td>Returns the data about a director searched for by name</td>
-      <td>None</td>
-      <td>JSON object with details of the director requested:
-        {
-        Name:
-        Bio:
-        Birth:
-        Death:
+      <td>A JSON object containing the record for the movie requested</td>
+      <td>
+        {<br>
+          "Genre": {"Name":"Agenre","Description":"This text describes the genre."},<br>
+          "Director": {"Name":"A Director","Bio":"This text is a bio of the director.","Birth":"2000"},<br>
+          "_id":"movieid1",<br>
+          "Title":"A movie",<br>
+          "Description":"This text is a synopsis.",<br>
+          "ImagePath":"https://path.jpg",<br>
+          "Featured":false<br>
         }
       </td>
     </tr>
-  </table>  
+    <tr>
+      <td>/movies/genre/[Name]</td>
+      <td>Returns the description of a movie genre searched for by name</td>
+      <td>GET</td>
+      <td>Read</td>
+      <td>None</td>
+      <td>Text</td>
+      <td>This text describes the genre.</td>
+    </tr>
+    <tr>
+      <td>/movies/director/[Name]</td>
+      <td>Returns the data about a director searched for by name</td>
+      <td>GET</td>
+      <td>Read</td>
+      <td>None</td>
+      <td>A JSON object with details of the director requested</td>
+      <td>
+        {<br>"Name":"A Director",<br>
+        "Bio":"This text is a bio of the director.",<br>
+        "Birth":"1900",<br>
+        "Death":"2000"<br>}
+      </td>
+    </tr>
+  </table>
+  <br>
+  <h2>Further information</h2>
+  <p>For further information about this API, please visit the project repository on github: 
+    <a href="https://github.com/Penny167/myFlix" target="_blank"> myFlix API repository</a>
+  </p>
+  <br>
+  <footer>
+    <p>
+      Designed by Penny Graham 2022 © All Rights Reserved
+    </p>
+  </footer>
 </body>
 
 </html>

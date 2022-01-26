@@ -26,9 +26,11 @@ const generateToken = (user) => {
 
 /**
  * Implements and exports a POST request to the /login endpoint for logging in a registered user. 
- * The request must include the user's Username and Password in the request parameters. The request is
- * authenticated using the local passport strategy and, if successful, a json web token is created by 
- * calling the generateToken function. The token is returned along with the authenticated user.
+ * There is no body required for this request but a Username and Password must be provided in the
+ * request parameters. By submitting these fields in an html form in the front end, they can be
+ * attached to the login URL as a query string. The request is authenticated using the local passport 
+ * strategy and, if successful, a json web token is created by calling the generateToken function. The
+ * token is returned along with the authenticated user.
  * @param {*} app The express application created in the index file.
  * @returns {Object} An object containing the record for the logged in user and the json web token.
  */

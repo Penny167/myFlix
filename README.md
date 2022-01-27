@@ -1,23 +1,57 @@
 # myFLix
 
-myFLix is a complete web application (client-side and server-side) built using the MERN stack. It provides users with access to information about different movies, directors, and genres. Users are able to register, update their registration details, perform searches on the information held in the database and create lists of their favorite movies. 
+myFlix is a REST API that interacts with a database hosted on MongoDB Atlas to provide a complete back end for a movie web application. The database contains a movies collection with data about a variety of classic films, as well as a users collection with data about registered users of applications that consume the API. The API can be used to perform a variety of CRUD operations on the data by sending HTTP requests to the API endpoints. These are documented in detail here: 
 
-A full table of available API endpoints is provided in the documentation file.
+An example movie web application that implements myFlix with a front end built using React is available here.
+An example movie web application that implements myFlix with a front end built using Angular is available here.
 
-The project to build myFLix is split into two parts, relating to the server and client sides respectively. Part one consists of a REST API that interacts with a non-relational database storing the movie and user information. Part two is the user interface created using REACT.
+The API is hosted on Heroku. It was built using Node.js and the Express framework.
 
-# Built with
+## Key Features
 
-The application has been developed using node.js.
+- myFlix implements a server and connects it to a non-relational database that holds data about movies and users.
+- Data is organised using defined schemas implemented by models.
+- A number of API endpoints are available to perform CRUD operations on the movie and user data. User records can be created, read, updated and deleted. Movie data can be read and users can add or remove "favourite" movies to or from their user records.
+- Requests to endpoints are protected by authentication and authorisation strategies implemented using Passport and jsonwebtoken.
+- Data validation checks are performed when creating and updating user records using express-validator.
 
-Developer skills and technologies involved in builing the application include:
+## Technologies used
 
-- Creation of a REST API using the Express framework
-- Application of business logic using Mongoose schema and models
-- Creation of a non-relational database in MongoDB
-- Application of user authentication using Passport and Json Web Tokens
-- Creation of a user interface using REACT
+- NODE
+- EXPRESS
+- MONGODB
+- MONGOOSE
+- PASSPORT
+- JWT
+- EXPRESS-VALIDATOR
+- HEROKU
 
-A full list of dependencies is contained within the package.json file.
+## Installation and set up
 
-The application is hosted on Heroku, with the database hosted on MongoDB Atlas.
+To install myFlix run 
+```
+npm install
+```
+This will provide the code and modules required to create myFlix. Next, you will need to set up a unique database for your specific project and decide where the API will be hosted. 
+
+A database can be created and hosted locally using MongoDB or hosted using MongoDB Atlas, where you can also create databases and collections directly. In order to recreate myFlix, two collections must be created: movies and users. Movies can be populated with movie data of your choice, following the movieSchema defined in the models.js file. Similarly, any manual user records created should follow the userSchema.
+
+Once the database has been set up, the mongoose connect method in the index.js file must be updated to replace the current URI string with the URI of your database. Similarly, the port reference defined when setting up the server must be configured to reflect where the API is hosted. In the current code, the database URI and port number reference environment variables stored on Heroku and it is recommended environment variables saved outside git are used to keep your application secure.
+
+To launch myFlix locally run
+```
+npm start
+```
+## AUTHOR
+Github [@penny167](https://github.com/Penny167)
+
+
+
+
+
+
+
+
+
+
+

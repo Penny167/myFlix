@@ -7,7 +7,7 @@
   <title>documentation</title>
   <style>
     table, th, td {
-      border: 1px solid black;
+      border: 1px solid #e040fb;
       border-collapse: collapse;
       font-size: 14px;
       padding: 5px;
@@ -15,28 +15,35 @@
     }
     body {
       margin: 25px;
+      background-color: #424242;
+      color: #1DE9B6;
     }
     footer {
       text-align: center;
+    }
+    a, h1, h2, footer, span {
+      color: #e040fb;
     }
   </style>
 </head>
 
 <body>
-  <h1>myFlix</h1>
+  <h1>myFlix 🎬</h1>
+  <br>
   <h2>Overview</h2>
   <p>
-    myFlix is a REST API that provides access to the myFlix database. The database contains a movies collection that holds data for a 
+    myFlix is a <span>REST API</span> that provides access to the <span>myFlix movies database</span>. The database contains a <span>movies collection</span> that holds data for a 
     selection of classic films. Each record includes a title, synopsis, image (from the IMDb), data about the director and data about
-    the movie genre. There is also a users collection that holds data about registered users of any applications that consume the API. A variety
-    of CRUD operations can be performed on the data by sending HTTP requests to the API endpoints. Details are provided in the following table.
+    the movie genre. There is also a <span>users collection</span> that holds data about registered users of any applications that consume the API. A variety
+    of CRUD operations can be performed on the data by sending <span>HTTP requests</span> to the API endpoints. Details are provided in the following table.
   </p>
+  <br>
   <h2>Table of API endpoints</h2>
   <p>
-    The table lists all the available endpoints and for each endpoint provides the following information: the URL, a description
-    of the operation fulfilled by the request, the HTTP method used in the request, the operation type, whether a request body is required and, if so,
-    an example of the format used; the format of responses received, and an example response. Request parameters included
-    within the URLs are indicated using square brackets.
+    The table lists <span>all the available endpoints</span> and for each endpoint provides the following information: the URL, a description
+    of the operation fulfilled by the request, the HTTP method used in the request, the operation type, whether a request body is required and an 
+    example of the format used; the format of responses received, and an example response. Request parameters included within the URLs are indicated
+    using square brackets.
   </p>
   <br>
   <table>
@@ -65,7 +72,8 @@
       <td>Create</td>
       <td>None. A username and password must be submitted as request parameters. By entering these via a form in the front end application, they are attached as a query string to the URL</td>
       <td>A JSON object containing the logged in user and the authorisation token. Passwords returned from the database are always hashed</td>
-      <td>{<br>
+      <td>
+        {<br>
         "user":{<br>
           "FavouriteMovies":["movieid1","movieid2"],<br>
           "_id":"mydatabaseid",<br>
@@ -76,7 +84,7 @@
           "__v":0<br>
         },<br>
         "token":"exampletoken"<br>
-      }
+        }
       </td>
     </tr>
     <tr>
@@ -93,7 +101,8 @@
         }
       </td>
       <td>A JSON object containing the registered user</td>
-      <td>{<br>
+      <td>
+        {<br>
           "FavouriteMovies": [],<br>
           "_id": "mydatabaseid",<br>
           "Username": "myusername",<br>
@@ -185,7 +194,7 @@
       <td>An array of the user's updated favourite movies. For this endpoint, the response returned contains an array with the full movie record for each of the user's favourite movies instead of an array with just the movie IDs</td>
       <td>
         [<br>
-    {<br>
+        {<br>
         "Genre": {
             "Name": "Agenre",
             "Description": "This text describes the genre."
@@ -200,8 +209,8 @@
         "Description": "This text is a synopsis.",<br>
         "ImagePath": "https://path.jpg",<br>
         "Featured": false<br>
-    },<br>
-    {<br>
+        },<br>
+        {<br>
         "Genre": {
             "Name": "Another genre",
             "Description": "This text describes the genre."
@@ -217,8 +226,8 @@
         "Description": "This text is a synopsis.",<br>
         "ImagePath": "https://path.jpg",<br>
         "Featured": false<br>
-    }<br>
-]
+        }<br>
+        ]
       </td>
     </tr>
     <tr>
@@ -230,7 +239,7 @@
       <td>An array of the user's updated favourite movies. For this endpoint, the response returned contains an array with the full movie record for each of the user's favourite movies instead of an array with just the movie IDs</td>
       <td>
         [<br>
-    {<br>
+        {<br>
         "Genre": {
             "Name": "Agenre",
             "Description": "This text describes the genre."
@@ -245,8 +254,8 @@
         "Description": "This text is a synopsis.",<br>
         "ImagePath": "https://path.jpg",<br>
         "Featured": false<br>
-    }<br>
-]
+        }<br>
+        ]
       </td>
     </tr>
     <tr>
@@ -329,7 +338,7 @@
   <br>
   <h2>Further information</h2>
   <p>For further information about this API, please visit the project repository on github: 
-    <a href="https://github.com/Penny167/myFlix" target="_blank"> myFlix API repository</a>
+    <a href="https://github.com/Penny167/myFlix" target="_blank"> myFlix</a>
   </p>
   <br>
   <footer>

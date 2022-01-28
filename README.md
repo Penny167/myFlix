@@ -4,10 +4,9 @@ myFlix is a REST API that interacts with a non-relational database to provide a 
 
 An example movie app that implements myFlix with a front end built using React is available here: [myFlix React app](https://github.com/Penny167/myFlix-client)
 
-An example movie app that implements myFlix with a front end built using Angular is available here:
-[myFlix Angular app](https://github.com/Penny167/myFlix-Angular-client)
+An example with a front end built using Angular is available here: [myFlix Angular app](https://github.com/Penny167/myFlix-Angular-client)
 
-The API was built using Node.js and the Express framework and is hosted on Heroku. The database is hosted on MongoDB Atlas. 
+myFlix was built using Node.js and the Express framework and is hosted on Heroku. The database is hosted on MongoDB Atlas. 
 
 ## Key Features
 

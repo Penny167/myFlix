@@ -1,6 +1,6 @@
 # myFlix 🎬
 
-myFlix is a REST API that interacts with a non-relational database to provide a complete back end for a movie web application. The database contains a movies collection holding data about a variety of classic films, as well as a users collection with data about registered users of applications that consume the API. 
+myFlix is a **REST API** that interacts with a non-relational database to provide **a complete back end for a movie web application**. The database contains a movies collection holding data about a variety of classic films, as well as a users collection with data about registered users of applications that consume the API. 
 
 A variety of CRUD operations can be performed on the data by sending HTTP requests to the API endpoints. These are documented in detail here: [myFlix API endpoints](https://intense-depths-38257.herokuapp.com/documentation.html).
 
@@ -10,7 +10,7 @@ A variety of CRUD operations can be performed on the data by sending HTTP reques
 
 - myFlix was built using Node.js and the Express framework and is hosted on [Heroku](https://www.heroku.com/platform). The database is hosted on [MongoDB Atlas](https://www.mongodb.com/atlas/database). 
 
-- Application documentation is included in the [out](https://github.com/Penny167/myFlix/tree/main/out) folder of the project repository.
+- Full application documentation is included in the [out](https://github.com/Penny167/myFlix/tree/main/out) folder of the project repository.
 
 ## Key Features
 

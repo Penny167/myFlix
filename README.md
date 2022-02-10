@@ -20,7 +20,7 @@ A variety of CRUD operations can be performed on the data by sending HTTP reques
 - Requests to endpoints are protected by authentication and authorisation strategies implemented using Passport and jsonwebtoken.
 - Data validation checks are performed when creating and updating user records using express-validator.
 
-## Technologies used
+## Technologies
 
 - Node
 - Express
